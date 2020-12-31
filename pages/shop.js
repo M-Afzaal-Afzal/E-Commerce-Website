@@ -1,11 +1,13 @@
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
-import {Box, Typography} from "@material-ui/core";
+import {Box, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import Layout from "../src/components/Layout/Layout";
 
 
 const Shop = () => {
+
+    const theme = useTheme();
 
     const dispatch = useDispatch();
 
@@ -107,39 +109,42 @@ const Shop = () => {
         dispatch(actions.subOneGlass(id));
     }
 
+    const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
+
     return (
         <Layout>
-            <Box mt={18} pl={8} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>SNEAKERS</Typography>
+            <Box mt={18} pl={matchesXs ? 4 : 8} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>SNEAKERS</Typography>
             </Box>
             <ProductsList products={sneakerProducts} subHandler={subSneakersHandler} addHandler={addSneakersHandler}
                           toggleCartHandler={toggleSneakersCartHandler}/>
-            <Box pl={8} mt={6} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>HATS</Typography>
+            <Box pl={matchesXs ? 4 : 8} mt={6} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>HATS</Typography>
             </Box>
             <ProductsList products={hatProducts} subHandler={subHatsHandler} addHandler={addHatsHandler}
                           toggleCartHandler={toggleHatsCartHandler}/>
 
-            <Box pl={8} mt={6} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>MENS</Typography>
+            <Box pl={matchesXs ? 4 : 8} mt={6} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>MENS</Typography>
             </Box>
             <ProductsList products={menProducts} subHandler={subMensHandler} addHandler={addMensHandler}
                           toggleCartHandler={toggleMensCartHandler}/>
 
-            <Box pl={8} mt={6} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>WOMENS</Typography>
+            <Box pl={matchesXs ? 4 : 8} mt={6} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>WOMENS</Typography>
             </Box>
             <ProductsList products={womenProducts} subHandler={subWomensHandler} addHandler={addWomensHandler}
                           toggleCartHandler={toggleWomensCartHandler}/>
 
-            <Box pl={8} mt={6} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>JACKETS</Typography>
+            <Box pl={matchesXs ? 4 : 8} mt={6} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>JACKETS</Typography>
             </Box>
             <ProductsList products={jacketProducts} subHandler={subJacketsHandler} addHandler={addJacketsHandler}
                           toggleCartHandler={toggleJacketsCartHandler}/>
 
-            <Box pl={8} mt={6} mb={-18}>
-                <Typography variant={'h3'} color={'primary'}>GLASSES</Typography>
+            <Box pl={matchesXs ? 4 : 8} mt={6} mb={-18}>
+                <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>GLASSES</Typography>
             </Box>
             <ProductsList products={glassProducts} subHandler={subGlassesHandler} addHandler={addGlassesHandler}
                           toggleCartHandler={toggleGlassesCartHandler}/>

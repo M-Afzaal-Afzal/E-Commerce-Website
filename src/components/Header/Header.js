@@ -4,18 +4,24 @@ import {
     AppBar,
     Badge,
     Box,
-    Button,
-    Grid,
+    Button, Drawer,
+    Grid, Hidden, Icon,
     IconButton,
     makeStyles, Paper,
     Popover,
-    Toolbar, Typography
+    Toolbar, Typography, useMediaQuery, useTheme
 } from "@material-ui/core";
 import Image from "next/image";
 import Link from '../../utils/Link';
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import {useSelector} from "react-redux";
-
+import DehazeOutlinedIcon from '@material-ui/icons/DehazeOutlined';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import {red} from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
     logo: {
@@ -43,6 +49,11 @@ const useStyles = makeStyles(theme => ({
     cartCardContainer: {
         borderRadius: '4px',
         overflow: "hidden",
+    },
+
+    listContainer: {
+        minWidth: '100%',
+        maxWidth: 360,
     }
 }))
 
@@ -63,7 +74,13 @@ const Header = () => {
 
     const classes = useStyles();
 
+    const theme = useTheme();
+
+    const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'))
+
     const [anchorEl, setAnchorEl] = useState(null);
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -72,6 +89,10 @@ const Header = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleDrawer = () => {
+        setOpenDrawer(!openDrawer);
+    }
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -117,34 +138,36 @@ const Header = () => {
             <Container maxWidth={'lg'}>
                 <Toolbar>
 
-                    <Box ml={6} my={2} className={classes.logo}>
+                    <Box ml={matchesSm ? 0 : 6} my={2} className={classes.logo}>
                         <Box component={Link} href={'/'}>
-                            <Image src={'/logo.png'} width={60} height={60} alt={'Logo'}/>
+                            <Image src={'/logo.png'} width={matchesXs ? 40 : 60} height={matchesXs ? 40 : 60}
+                                   alt={'Logo'}/>
                         </Box>
                     </Box>
 
-                    <Button className={classes.link} component={Link} href={'/'}>HOME</Button>
+                    <Hidden smDown>
+                        <Button className={classes.link} component={Link} href={'/'}>HOME</Button>
 
-                    <Box mx={2}>
+                        <Box mx={2}>
 
-                        <Button className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
-                    </Box>
+                            <Button className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
+                        </Box>
 
-                    <Box mr={2}>
-                        <Button className={classes.link} component={Link} href={'/shop'}>Category</Button>
-                    </Box>
+                        {/*<Box mr={2}>*/}
+                        {/*    <Button className={classes.link} component={Link} href={'/shop'}>Category</Button>*/}
+                        {/*</Box>*/}
 
-                    <Box mr={2}>
-                        <Button className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
-                    </Box>
+                        <Box mr={2}>
+                            <Button className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
+                        </Box>
 
-                    {/*<Box mx={2}>*/}
-                    {/*    <Button>CONTACT</Button>*/}
-                    {/*</Box>*/}
+                        {/*<Box mx={2}>*/}
+                        {/*    <Button>CONTACT</Button>*/}
+                        {/*</Box>*/}
 
-                    <Button component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
-
-                    <Box ml={2} mr={6} className={classes.popoverContainer}>
+                        <Button component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
+                    </Hidden>
+                    <Box ml={2} mr={matchesXs ? 0 : (matchesSm ? 2 : 6)} className={classes.popoverContainer}>
                         <IconButton aria-describedby={id} onClick={handleClick}>
                             <Badge badgeContent={cartedProducts.length} color="secondary">
                                 <ShoppingCartOutlinedIcon/>
@@ -187,6 +210,34 @@ const Header = () => {
                             </Paper>
                         </Popover>
                     </Box>
+
+                    <Hidden mdUp>
+                        <IconButton onClick={handleDrawer}>
+                            <DehazeOutlinedIcon color={'default'}/>
+                        </IconButton>
+                    </Hidden>
+                    <Drawer open={openDrawer} onClose={handleDrawer}>
+                        <Box className={classes.listContainer}>
+                            <List>
+                                <ListItem component={Link} href={'/'} color={'primary'} button>
+                                    <ListItemText primary={'HOME'}/>
+                                </ListItem>
+                                <Divider/>
+                                <ListItem component={Link} href={'/shop'} button>
+                                    <ListItemText primary={'SHOP'}/>
+                                </ListItem>
+                                <Divider/>
+                                <ListItem component={Link} href={'/checkout'} button>
+                                    <ListItemText primary={'CHECKOUT'}/>
+                                </ListItem>
+                                <Divider/>
+                                <ListItem component={Link} href={'/signin'} button>
+                                    <ListItemText primary={'SIGNIN'}/>
+                                </ListItem>
+                                <Divider/>
+                            </List>
+                        </Box>
+                    </Drawer>
 
                 </Toolbar>
             </Container>
