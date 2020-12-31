@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = () => {
 
-    const {register, handleSubmit, errors,control} = useForm();
+    const {register, handleSubmit, errors, control} = useForm();
 
     const onSubmit = handleSubmit(data => {
 
@@ -71,7 +71,8 @@ const SignIn = () => {
                                 <Grid container justify={'center'} direction={'column'}>
                                     <Grid item container justify={'center'}>
                                         <Box>
-                                            <Typography variant={'h5'} color={'primary'}>Log in to your
+                                            <Typography style={{textAlign: 'center'}} variant={'h5'} color={'primary'}>Log
+                                                in to your
                                                 account</Typography>
                                         </Box>
                                     </Grid>
@@ -112,7 +113,8 @@ const SignIn = () => {
                                     </Grid>
                                     <Grid item container justify={'center'}>
                                         <Box mt={1} mb={2}>
-                                            <Button  className={classes.link} component={Link} href={'/signup'}
+                                            <Button style={{textAlign: 'center'}} className={classes.link}
+                                                    component={Link} href={'/signup'}
                                                     color={'secondary'}>Don't have account, go to signup</Button>
                                         </Box>
                                     </Grid>
