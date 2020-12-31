@@ -1,4 +1,4 @@
-import {Box, Button, ButtonGroup, Grid, IconButton, makeStyles, Paper, Typography,} from "@material-ui/core";
+import {Box, Button, ButtonGroup, Grid, IconButton, makeStyles, Paper, Snackbar, Typography,} from "@material-ui/core";
 import Image from 'next/image'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import Container from "@material-ui/core/Container";
@@ -7,6 +7,12 @@ import AddIcon from "@material-ui/icons/Add";
 import {useDispatch, useSelector} from "react-redux";
 import * as actions from '../src/store/actions/index.actions';
 import Layout from "../src/components/Layout/Layout";
+import MuiAlert from '@material-ui/lab/Alert';
+import {useState} from "react";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +51,15 @@ const Checkout = () => {
 
     const cartedProducts = allProducts.filter(product => product.isAddedToCart);
 
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const toggleCart = (type, id) => {
         switch (type) {
@@ -69,6 +84,7 @@ const Checkout = () => {
             default:
                 throw new Error('Checkout file product type error');
         }
+        setOpen(true);
     }
 
     const handleAdd = (type, id) => {
@@ -182,12 +198,18 @@ const Checkout = () => {
                                         <IconButton onClick={() => toggleCart(product.category, product.id)}>
                                             <CloseOutlinedIcon color={'primary'} fontSize={'small'}/>
                                         </IconButton>
+                                        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                                            <Alert onClose={handleClose} severity="error">
+                                                Item is removed from the cart
+                                            </Alert>
+                                        </Snackbar>
                                     </Grid>
 
                                 </Grid>
                             )
                         })}
-                        <Grid style={{justifyContent: 'space-around',marginTop: '80px'}} item container jusify={'space-around'} alignItems={'center'}>
+                        <Grid style={{justifyContent: 'space-around', marginTop: '80px'}} item container
+                              jusify={'space-around'} alignItems={'center'}>
                             <Grid item>
                                 <Box>
                                     <Typography color={'secondary'} variant={'h5'}>GRAND TOTAL</Typography>
