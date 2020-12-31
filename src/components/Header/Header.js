@@ -213,7 +213,7 @@ const Header = () => {
 
                     <Hidden mdUp>
                         <IconButton onClick={handleDrawer}>
-                            <DehazeOutlinedIcon color={'default'}/>
+                            <DehazeOutlinedIcon />
                         </IconButton>
                     </Hidden>
                     <Drawer open={openDrawer} onClose={handleDrawer}>

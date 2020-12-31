@@ -114,7 +114,7 @@ const Shop = () => {
 
     return (
         <Layout>
-            <Box mt={18} pl={matchesXs ? 4 : 8} mb={-18}>
+            <Box mt={matchesXs ? 12 : 18} pl={matchesXs ? 4 : 8} mb={-18}>
                 <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>SNEAKERS</Typography>
             </Box>
             <ProductsList products={sneakerProducts} subHandler={subSneakersHandler} addHandler={addSneakersHandler}

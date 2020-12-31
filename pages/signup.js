@@ -1,6 +1,17 @@
 import React from 'react';
 import Layout from "../src/components/Layout/Layout";
-import {Box, Button, Container, Grid, makeStyles, Paper, TextField, Typography} from "@material-ui/core";
+import {
+    Box,
+    Button,
+    Container,
+    Grid,
+    makeStyles,
+    Paper,
+    TextField,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from "@material-ui/core";
 import Link from '../src/utils/Link';
 import {useForm} from "react-hook-form";
 
@@ -40,11 +51,14 @@ const SignIn = () => {
         console.log(data);
     })
 
+    const theme = useTheme();
+
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
         <div className={classes.mainContainer}>
             <Layout>
-                <Box pt={18}>
+                <Box pt={matchesXs ? 13 : 18}>
 
                     <Container maxWidth={'lg'}>
                         <form onSubmit={handleSubmit(onSubmit)}>

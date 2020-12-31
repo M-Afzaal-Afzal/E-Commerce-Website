@@ -1,6 +1,17 @@
 import React, {useState} from 'react';
 import Layout from "../src/components/Layout/Layout";
-import {Box, Button, Container, FormControl, Grid, makeStyles, Paper, TextField, Typography} from "@material-ui/core";
+import {
+    Box,
+    Button,
+    Container,
+    FormControl,
+    Grid,
+    makeStyles,
+    Paper,
+    TextField,
+    Typography, useMediaQuery,
+    useTheme
+} from "@material-ui/core";
 import Link from '../src/utils/Link'
 import {signInWithGoogle} from "../src/firebaseUtils/firebaseUtils";
 import {useForm} from 'react-hook-form';
@@ -59,10 +70,14 @@ const SignIn = () => {
     // }
     console.log(errors);
 
+    const theme = useTheme();
+
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
+
     return (
         <div className={classes.mainContainer}>
             <Layout>
-                <Box pt={18}>
+                <Box pt={matchesXs ? 13 : 18} pb={8}>
 
                     <Container component={Grid} container justify={'center'} maxWidth={'lg'}>
 

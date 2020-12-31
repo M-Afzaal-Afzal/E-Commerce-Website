@@ -1,4 +1,4 @@
-import {Box, Button, Container, Grid, makeStyles, Typography,} from "@material-ui/core";
+import {Box, Button, Container, Grid, makeStyles, Typography, useMediaQuery, useTheme,} from "@material-ui/core";
 import {Fragment} from "react";
 import Header from "../src/components/Header/Header";
 import Image from 'next/image'
@@ -24,6 +24,10 @@ const useStyles = makeStyles(theme => ({
 const Index = () => {
 
     const classes = useStyles();
+
+    const theme = useTheme();
+
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
 
     const products = [
         {
@@ -55,13 +59,11 @@ const Index = () => {
             img: '/glasses.jpg',
             productsUrl: '/glasses',
         },
-
-
     ]
 
     return (
         <Layout>
-            <Box mt={18}>
+            <Box mt={matchesXs ? 12 : 18}>
                 <Grid container direction={'column'}>
 
                     <Container maxWidth={'lg'} disableGutters>
