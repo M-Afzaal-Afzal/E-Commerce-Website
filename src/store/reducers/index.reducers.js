@@ -1,44 +1,21 @@
-import { combineReducers } from 'redux'
-import * as types from '../actionTypes/actionTypes'
+import { combineReducers } from 'redux';
+import hatsReducer from './hats.reducer';
+import glassesReducer from './glasses.reducer';
+import jacketsReducer from './jackets.reducer';
+import mensReducer from './mens.reducer';
+import womensReducer from './women.reducer';
+import sneakersReducer from './sneakers.reducer';
 
 
-// COUNTER REDUCER
-const counterReducer = (state = 0, { type }) => {
-    switch (type) {
-        case types.INCREMENT:
-            return state + 1
-        case types.DECREMENT:
-            return state - 1
-        case types.RESET:
-            return 0
-        default:
-            return state
-    }
-}
-
-// INITIAL TIMER STATE
-const initialTimerState = {
-    lastUpdate: 0,
-    light: false,
-}
-
-// TIMER REDUCER
-const timerReducer = (state = initialTimerState, { type, payload }) => {
-    switch (type) {
-        case types.TICK:
-            return {
-                lastUpdate: payload.ts,
-                light: !!payload.light,
-            }
-        default:
-            return state
-    }
-}
 
 // COMBINED REDUCERS
 const reducers = {
-    counter: counterReducer,
-    timer: timerReducer,
+    hats: hatsReducer,
+    sneakers: sneakersReducer,
+    womens: womensReducer,
+    mens: mensReducer,
+    jackets: jacketsReducer,
+    glasses: glassesReducer,
 }
 
 export default combineReducers(reducers)

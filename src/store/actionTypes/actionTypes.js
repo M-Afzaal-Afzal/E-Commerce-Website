@@ -1,4 +1,24 @@
-export const TICK = 'TICK'
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
-export const RESET = 'RESET'
+export const TOGGLE_HAT_CART = 'TOGGLE_HAT_CART';
+export const ADD_ONE_HAT = 'ADD_ONE_EHAT';
+export const SUB_ONE_HAT = 'SUB_ONE_HAT';
+
+export const TOGGLE_SNEAKER_CART = 'TOGGLE_SNEAKERS_CART';
+export const SUB_ONE_SNEAKER = 'SUB_ONE_SNEAKER';
+export const ADD_ONE_SNEAKER = 'ADD_ONE_SNEAKER';
+
+export const TOGGLE_MEN_CART = 'TOGGLE_MEN_CART';
+export const ADD_ONE_MEN = 'ADD_ONE_MEN';
+export const SUB_ONE_MEN = 'SUB_ONE_MEN';
+
+export const TOGGLE_WOMEN_CART = 'TOGGLE_WOMEN_CART';
+export const ADD_ONE_WOMEN = 'ADD_ONE_WOMEN';
+export const SUB_ONE_WOMEN = 'SUB_ONE_WOMEN';
+
+export const TOGGLE_JACKET_CART = 'TOGGLE_JACKET_CART';
+export const ADD_ONE_JACKET = 'ADD_ONE_JACKET';
+export const SUB_ONE_JACKET = 'SUB_ONE_JACKET';
+
+
+export const TOGGLE_GLASS_CART = 'TOGGLE_GLASS_CART';
+export const ADD_ONE_GLASS = 'ADD_ONE_GLASS';
+export const SUB_ONE_GLASS = 'SUB_ONE_GLASS';
