@@ -77,7 +77,7 @@ const Index = () => {
                                                     <Image src={product.img} width={400} height={400}/>
                                                     <CardContent>
                                                         <Grid container justify={'center'}>
-                                                            <Typography color={'primary'} variant={'h3'}>
+                                                            <Typography color={'primary'} variant={'h5'}>
                                                                 {product.name}
                                                             </Typography>
                                                         </Grid>
