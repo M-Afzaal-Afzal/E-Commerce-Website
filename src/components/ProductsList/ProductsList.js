@@ -34,7 +34,8 @@ const ProductsList = (props) => {
     // }
 
     const theme = useTheme();
-    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'))
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
+    const matches310 = useMediaQuery('(max-width:310px)');
 
     return (
 
@@ -66,22 +67,29 @@ const ProductsList = (props) => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
-                                            <Grid container justify={'space-between'} alignItems={'center'}>
-                                                <Button size={'small'} onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id,product.category) : () => props.toggleCartHandler(product.id)}
-                                                        color={'secondary'} variant={"outlined"}>
-                                                    <Typography color={'secondary'} variant={'subtitle2'}>
-                                                        {props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
-                                                        {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
-                                                    </Typography>
-                                                </Button>
-                                                <ButtonGroup color={'secondary'}>
-                                                    <Button size={'small'} onClick={props.cartedProducts ? () =>  props.subHandler(product.id,product.category): () => props.subHandler(product.id)}>
-                                                        <RemoveIcon fontSize="small"/>
+                                            <Grid direction={matches310 ? 'column': 'row'} container justify={'space-between'} alignItems={'center'}>
+
+                                                <Grid item style={{order: matches310 ? 1 : 0,width: matches310 ? '100%':''}}>
+                                                    <Button fullWidth={matches310} size={'small'} onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id,product.category) : () => props.toggleCartHandler(product.id)}
+                                                            color={'secondary'} variant={"contained"}>
+                                                        <Typography color={'default'} variant={'subtitle2'}>
+                                                            {props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
+                                                            {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
+                                                        </Typography>
                                                     </Button>
-                                                    <Button size={'small'} onClick={props.cartedProducts ? () => props.addHandler(product.id,product.category) : () => props.addHandler(product.id)}>
-                                                        <AddIcon fontSize={'small'}/>
-                                                    </Button>
-                                                </ButtonGroup>
+                                                </Grid>
+
+                                                <Grid item style={{order: matches310 ? -1 : 0,marginBottom: matches310 ? '8px': '0'}}>
+                                                    <ButtonGroup color={'secondary'}>
+                                                        <Button size={'small'} onClick={props.cartedProducts ? () =>  props.subHandler(product.id,product.category): () => props.subHandler(product.id)}>
+                                                            <RemoveIcon fontSize="small"/>
+                                                        </Button>
+                                                        <Button size={'small'} onClick={props.cartedProducts ? () => props.addHandler(product.id,product.category) : () => props.addHandler(product.id)}>
+                                                            <AddIcon fontSize={'small'}/>
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                </Grid>
+
                                             </Grid>
 
                                         </CardActions>
