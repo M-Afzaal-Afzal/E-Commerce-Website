@@ -45,7 +45,7 @@ const ProductsList = (props) => {
                     <Grid container spacing={2} justify={'center'} align={'center'}>
                         {props.products.map(product => {
                             return (
-                                <Grid item container md={4} sm={6} lg={3} key={product.id} justify={'center'}>
+                                <Grid item container md={4} sm={6} lg={3} key={product.name} justify={'center'}>
                                     <Card>
                                         <CardActionArea disableRipple>
                                             <Image src={product.image} width={400} height={500}/>
@@ -72,7 +72,7 @@ const ProductsList = (props) => {
                                                 <Grid item style={{order: matches310 ? 1 : 0,width: matches310 ? '100%':''}}>
                                                     <Button fullWidth={matches310} size={'small'} onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id,product.category) : () => props.toggleCartHandler(product.id)}
                                                             color={'secondary'} variant={"contained"}>
-                                                        <Typography color={'default'} variant={'subtitle2'}>
+                                                        <Typography variant={'subtitle2'}>
                                                             {props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
                                                             {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
                                                         </Typography>

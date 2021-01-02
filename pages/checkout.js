@@ -154,7 +154,7 @@ const Checkout = () => {
         }
     }
 
-    console.log(cartedProducts);
+    // console.log(cartedProducts);
 
     return (
         <Layout>
@@ -171,7 +171,7 @@ const Checkout = () => {
                     <Grid container>
                         {cartedProducts.map(product => {
                             return (
-                                <Fragment>
+                                <Fragment key={product.name}>
 
                                     <Hidden xsDown>
                                         <Grid item container className={classes.cardContainer} alignItems={'center'}
