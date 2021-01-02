@@ -77,7 +77,7 @@ const SignIn = () => {
     return (
         <div className={classes.mainContainer}>
             <Layout>
-                <Box pt={matchesXs ? 13 : 18} pb={8}>
+                <Box pt={matchesXs ? 13 : 18} pb={15}>
 
                     <Container component={Grid} container justify={'center'} maxWidth={'lg'}>
 

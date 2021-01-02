@@ -213,12 +213,21 @@ const Header = () => {
 
                     <Hidden mdUp>
                         <IconButton onClick={handleDrawer}>
-                            <DehazeOutlinedIcon />
+                            <DehazeOutlinedIcon/>
                         </IconButton>
                     </Hidden>
                     <Drawer open={openDrawer} onClose={handleDrawer}>
                         <Box className={classes.listContainer}>
                             <List>
+                                <ListItem component={Link} href={'/'} color={'primary'}>
+                                    <ListItemText>
+                                        <Grid container justify={'center'} alignItems={'center'}>
+                                            <Box mx={4}>
+                                                <Image src={'/logo.png'} width={60} height={60}/>
+                                            </Box>
+                                        </Grid>
+                                    </ListItemText>
+                                </ListItem>
                                 <ListItem component={Link} href={'/'} color={'primary'} button>
                                     <ListItemText primary={'HOME'}/>
                                 </ListItem>

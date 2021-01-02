@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Box, Button, ButtonGroup, Container, Grid, Typography} from "@material-ui/core";
+import {Box, Button, ButtonGroup, Container, Grid, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -33,11 +33,14 @@ const ProductsList = (props) => {
     //     dispatch(actions.subOneMens(id));
     // }
 
+    const theme = useTheme();
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'))
+
     return (
 
         <Fragment>
             <Box mt={18}>
-                <Container maxWidth={'lg'}>
+                <Container style={{paddingLeft: '8px',paddingRight: '8px'}}>
                     <Grid container spacing={2} justify={'center'} align={'center'}>
                         {props.products.map(product => {
                             return (
@@ -64,17 +67,18 @@ const ProductsList = (props) => {
                                         </CardActionArea>
                                         <CardActions>
                                             <Grid container justify={'space-between'} alignItems={'center'}>
-                                                <Button size={'small'} onClick={() => props.toggleCartHandler(product.id)}
+                                                <Button size={'small'} onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id,product.category) : () => props.toggleCartHandler(product.id)}
                                                         color={'secondary'} variant={"outlined"}>
                                                     <Typography color={'secondary'} variant={'subtitle2'}>
-                                                        {product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}
+                                                        {props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
+                                                        {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
                                                     </Typography>
                                                 </Button>
                                                 <ButtonGroup color={'secondary'}>
-                                                    <Button size={'small'} onClick={() => props.subHandler(product.id)}>
+                                                    <Button size={'small'} onClick={props.cartedProducts ? () =>  props.subHandler(product.id,product.category): () => props.subHandler(product.id)}>
                                                         <RemoveIcon fontSize="small"/>
                                                     </Button>
-                                                    <Button size={'small'} onClick={() => props.addHandler(product.id)}>
+                                                    <Button size={'small'} onClick={props.cartedProducts ? () => props.addHandler(product.id,product.category) : () => props.addHandler(product.id)}>
                                                         <AddIcon fontSize={'small'}/>
                                                     </Button>
                                                 </ButtonGroup>
