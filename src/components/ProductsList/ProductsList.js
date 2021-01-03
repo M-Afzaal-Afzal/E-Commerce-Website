@@ -43,7 +43,7 @@ const ProductsList = (props) => {
             <Box mt={18}>
                 <Container style={{paddingLeft: '8px',paddingRight: '8px'}}>
                     <Grid container spacing={2} justify={'center'} align={'center'}>
-                        {props.products.map(product => {
+                        {props.products.map((product,index) => {
                             return (
                                 <Grid item container md={4} sm={6} lg={3} key={product.name} justify={'center'}>
                                     <Card>

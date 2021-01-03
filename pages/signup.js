@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
@@ -36,15 +36,34 @@ const useStyles = makeStyles(theme => ({
 const SignIn = () => {
 
     const classes = useStyles();
-    const {register, handleSubmit, errors,control} = useForm();
+    const {register, handleSubmit, errors,control,watch} = useForm();
 
-    const reqReg = register({
-        required: true,
+    const nameReg = register({
+        required: "Please Enter Your Real Name",
+    })
+
+    const password = useRef({});
+    password.current = watch("password");
+
+    const emailReg = register({
+        required: "You must specify an email",
+        pattern: {
+            value: /^\S+@\S+$/i,
+            message: 'Invalid Email'
+        }
     })
 
     const passwordReg = register({
-        required: true,
-        minLength: 6,
+        required: "You must specify a password",
+        minLength: {
+            value: 8,
+            message: "Password must have at least 8 characters"
+        }
+    })
+
+    const repeatPasswordReg = register({
+        validate: value =>
+            value === password.current || "The passwords do not match"
     })
 
     const onSubmit = handleSubmit(data => {
@@ -79,9 +98,10 @@ const SignIn = () => {
                                                 size={"small"}
                                                 type={'text'}
                                                 fullWidth id="name"
+                                                helperText={errors.name ? errors.name.message : ''}
                                                 name={'name'}
-                                                error={errors.name}
-                                                inputRef={reqReg}
+                                                error={Boolean(errors.name)}
+                                                inputRef={nameReg}
                                                 aria-controls={control}
                                                 label="Name" variant="outlined"/>
                                         </Box>
@@ -91,8 +111,9 @@ const SignIn = () => {
                                             <TextField size={"small"} type={'email'} fullWidth id="outlined-basic"
                                                        label="E-Mail" variant="outlined"
                                                        name={'email'}
-                                                       error={errors.email}
-                                                       inputRef={reqReg}
+                                                       helperText={errors.email ? errors.email.message : ''}
+                                                       error={Boolean(errors.email)}
+                                                       inputRef={emailReg}
                                                        aria-controls={control}
 
                                             />
@@ -104,7 +125,8 @@ const SignIn = () => {
                                                        label="Password"
                                                        variant="outlined"
                                                        name={'password'}
-                                                       error={errors.password}
+                                                       helperText={errors.password ? errors.password.message: ''}
+                                                       error={Boolean(errors.password)}
                                                        inputRef={passwordReg}
                                                        aria-controls={control}
                                             />
@@ -114,9 +136,10 @@ const SignIn = () => {
                                         <Box mt={5} style={{width: '90%'}}>
                                             <TextField size={"small"} type={'password'} fullWidth id="confirmPassword"
                                                        label="Confirm Password" variant="outlined"
-                                                       name={'password'}
-                                                       error={errors.password}
-                                                       inputRef={passwordReg}
+                                                       name={'repeatPassword'}
+                                                       error={Boolean(errors.repeatPassword)}
+                                                       helperText={errors.repeatPassword ? errors.repeatPassword.message: ''}
+                                                       inputRef={repeatPasswordReg}
                                                        aria-controls={control}
                                             />
                                         </Box>
