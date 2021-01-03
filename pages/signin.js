@@ -50,13 +50,19 @@ const SignIn = () => {
 
 
     const emailReg = register({
-        required: true,
-        pattern: /^\S+@\S+$/i,
+        required: "You must specify an email",
+        pattern: {
+            value: /^\S+@\S+$/i,
+            message: 'Invalid Email'
+        }
     })
 
     const passwordReg = register({
-        required: true,
-        minLength: 6,
+        required: "You must specify a password",
+        minLength: {
+            value: 8,
+            message: "Password must have at least 8 characters"
+        }
     })
 
     const classes = useStyles();
@@ -103,7 +109,7 @@ const SignIn = () => {
                                                            aria-controls={control}
                                                            name={'email'}
                                                            error={Boolean(errors.email)}
-                                                           helperText={errors.email && 'Invalid Email'}
+                                                           helperText={errors.email && errors.email.message}
                                                            size={"small"} type={'email'} fullWidth id="email"
                                                            label="E-Mail" variant="outlined"/>
                                             </Box>
@@ -114,7 +120,7 @@ const SignIn = () => {
                                                            aria-controls={control}
                                                            name={'password'}
                                                            error={Boolean(errors.password)}
-                                                           helperText={errors.password && 'Password must be of six characters'}
+                                                           helperText={errors.password && errors.password.message}
                                                            inputRef={passwordReg}
                                                            type={'password'} fullWidth id="password" label="Password"
                                                            variant="outlined"/>
