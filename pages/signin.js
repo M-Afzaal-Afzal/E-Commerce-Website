@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
@@ -16,7 +16,7 @@ import Link from '../src/utils/Link'
 import {signInWithGoogle} from "../src/firebaseUtils/firebaseUtils";
 import {useForm} from 'react-hook-form';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     cardContainer: {
         maxWidth: '450px',
         padding: '25px',
@@ -128,7 +128,7 @@ const SignIn = () => {
                                         </Grid>
                                         <Grid item container justify={'center'}>
                                             <Box mt={5} mb={-2} style={{width: '90%'}}>
-                                                <Button type={'submit'} fullWidth size={'large'}
+                                                <Button name={'sign in'} type={'submit'} fullWidth size={'large'}
                                                         color={'primary'} variant={'contained'}>Sign
                                                     In</Button>
                                             </Box>
@@ -136,13 +136,17 @@ const SignIn = () => {
 
                                         <Grid item container justify={'center'}>
                                             <Box mt={5}>
-                                                <Button onClick={signInWithGoogle} color={'primary'}>Sign In with
+                                                <Button
+                                                    name={'sign in with google'}
+                                                    onClick={signInWithGoogle} color={'primary'}>Sign In with
                                                     Google</Button>
                                             </Box>
                                         </Grid>
                                         <Grid item container justify={'center'}>
                                             <Box mt={1} mb={2}>
-                                                <Button style={{textAlign: 'center'}} className={classes.link}
+                                                <Button
+                                                    name={'Don\'t have account, go to signup'}
+                                                    style={{textAlign: 'center'}} className={classes.link}
                                                         component={Link} href={'/signup'}
                                                         color={'secondary'}>Don't have account, go to signup</Button>
                                             </Box>

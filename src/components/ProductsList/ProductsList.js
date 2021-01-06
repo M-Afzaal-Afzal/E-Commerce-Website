@@ -58,8 +58,8 @@ const useStyles = makeStyles(() => ({
 const ProductsList = (props) => {
 
     const classes=useStyles();
-    const theme = useTheme();
-    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
+    // const theme = useTheme();
+    // const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
     const matches310 = useMediaQuery('(max-width:310px)');
 
     return (
@@ -69,7 +69,7 @@ const ProductsList = (props) => {
                 <Container style={{paddingLeft: '8px', paddingRight: '8px'}}>
                     <Grid container spacing={2} justify={'center'} align={'center'}>
                         <AnimatePresence>
-                            {props.products.map((product, index) => {
+                            {props.products.map((product) => {
                                 return (
                                     <Grid item container md={4} sm={6} lg={3}
                                           justify={'center'}
@@ -83,8 +83,8 @@ const ProductsList = (props) => {
                                     >
 
                                         <Card elevation={0} className={classes.cardContainer}>
-                                            <CardActionArea disabled className={classes.cardActionArea} disableRipple>
-                                                <Image src={product.image} width={400} height={500}/>
+                                            <CardActionArea disabled disableRipple>
+                                                <Image src={product.image} width={350} height={400} alt={product.name}/>
                                                 <CardContent>
                                                     <Grid container justify={'space-between'}>
                                                         <Typography color={'primary'}
@@ -110,7 +110,7 @@ const ProductsList = (props) => {
                                                         order: matches310 ? 1 : 0,
                                                         width: matches310 ? '100%' : ''
                                                     }}>
-                                                        <Button fullWidth={matches310} size={'small'}
+                                                        <Button name={props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')} fullWidth={matches310} size={'small'}
                                                                 onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id, product.category) : () => props.toggleCartHandler(product.id)}
                                                                 color={'secondary'} variant={"contained"}>
                                                             <Typography variant={'subtitle2'}>
@@ -125,11 +125,11 @@ const ProductsList = (props) => {
                                                         marginBottom: matches310 ? '8px' : '0'
                                                     }}>
                                                         <ButtonGroup color={'secondary'}>
-                                                            <Button size={'small'}
+                                                            <Button name={'subOne'} size={'small'}
                                                                     onClick={props.cartedProducts ? () => props.subHandler(product.id, product.category) : () => props.subHandler(product.id)}>
                                                                 <RemoveIcon fontSize="small"/>
                                                             </Button>
-                                                            <Button size={'small'}
+                                                            <Button name={'addOne'} size={'small'}
                                                                     onClick={props.cartedProducts ? () => props.addHandler(product.id, product.category) : () => props.addHandler(product.id)}>
                                                                 <AddIcon fontSize={'small'}/>
                                                             </Button>

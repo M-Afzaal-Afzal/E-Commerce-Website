@@ -145,7 +145,7 @@ const SignIn = () => {
                                     </Grid>
                                     <Grid item container justify={'center'}>
                                         <Box mt={5} mb={2} style={{width: '90%'}}>
-                                            <Button type={"submit"} fullWidth size={'large'} color={'primary'} variant={'contained'}>Sign
+                                            <Button name={'sign_up'} type={"submit"} fullWidth size={'large'} color={'primary'} variant={'contained'}>Sign
                                                 up</Button>
                                         </Box>
                                     </Grid>

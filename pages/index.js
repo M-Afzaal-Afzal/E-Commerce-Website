@@ -96,7 +96,7 @@ const Index = () => {
                                         <Grid item container justify={'center'} sm={6} md={4} key={product.name}>
                                             <Card elevation={0} className={classes.cardContainer}>
                                                 <CardActionArea disabled disableRipple>
-                                                    <Image src={product.img} width={400} height={400}/>
+                                                    <Image src={product.img} width={350} height={350} alt={product.name}/>
                                                     <CardContent>
                                                         <Grid container justify={'center'}>
                                                             <Typography color={'primary'} variant={'h5'}>
@@ -107,7 +107,9 @@ const Index = () => {
                                                 </CardActionArea>
                                                 <CardActions>
                                                     <Grid container justify={'center'}>
-                                                        <Button variant={'contained'} className={classes.linkButton} component={Link}
+                                                        <Button
+                                                            name={'Shop ' + product.name}
+                                                            variant={'contained'} className={classes.linkButton} component={Link}
                                                                 href={product.productsUrl} size="large" color="primary">
                                                             SHOP NOW
                                                         </Button>

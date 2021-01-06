@@ -197,7 +197,7 @@ const Checkout = () => {
                                             >
                                                 <Grid item className={classes.cardImageContainer} component={Box}
                                                       boxShadow={3}>
-                                                    <Image src={product.image} width={160} height={190}/>
+                                                    <Image src={product.image} width={160} height={190} alt={product.name}/>
                                                 </Grid>
                                                 {/*style={{flexGrow: 1}}*/}
                                                 <Grid item xs>
@@ -228,11 +228,13 @@ const Checkout = () => {
                                                                     <Box mt={1}>
                                                                         <ButtonGroup color={'secondary'}>
                                                                             <Button
+                                                                                name={'add one' + product.name}
                                                                                 onClick={() => handleSub(product.id, product.category)}
                                                                                 size={'small'}>
                                                                                 <RemoveIcon fontSize="small"/>
                                                                             </Button>
                                                                             <Button
+                                                                                name={'remove one' + product.name}
                                                                                 onClick={() => handleAdd(product.id, product.category)}
                                                                                 size={'small'}>
                                                                                 <AddIcon fontSize={'small'}/>
@@ -274,6 +276,7 @@ const Checkout = () => {
                                                             <Grid item sm align={'right'}>
                                                                 <Box>
                                                                     <IconButton
+                                                                        name={'remove_from_cart'}
                                                                         onClick={() => toggleCart(product.id, product.category)}>
                                                                         <CloseOutlinedIcon color={'primary'}
                                                                                            fontSize={'small'}/>
@@ -310,7 +313,7 @@ const Checkout = () => {
                         </Grid>
                         <Grid item container justify={'center'}>
                             <Box mt={5} mb={10}>
-                                <Button size={"large"} variant={'contained'} color={'secondary'}>
+                                <Button name={'pay now'} size={"large"} variant={'contained'} color={'secondary'}>
                                     PAY NOW
                                 </Button>
                             </Box>

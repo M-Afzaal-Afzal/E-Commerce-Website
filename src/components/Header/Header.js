@@ -18,10 +18,8 @@ import {useSelector} from "react-redux";
 import DehazeOutlinedIcon from '@material-ui/icons/DehazeOutlined';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import {red} from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
     logo: {
@@ -114,7 +112,7 @@ const Header = () => {
                     <Grid container alignItems={'stretch'}>
                         <Grid item xs={4} style={{height: '90px'}}>
                             <Image src={cartedProduct.image} width={80}
-                                   height={90}/>
+                                   height={90} alt={cartedProduct.name}/>
                         </Grid>
                         <Grid item xs={8} style={{flexGrow: 1}}>
                             <Box ml={2} mt={1}>
@@ -146,11 +144,11 @@ const Header = () => {
                     </Box>
 
                     <Hidden smDown>
-                        <Button className={classes.link} component={Link} href={'/'}>HOME</Button>
+                        <Button name={'home'} className={classes.link} component={Link} href={'/'}>HOME</Button>
 
                         <Box mx={2}>
 
-                            <Button className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
+                            <Button name={'shop'} className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
                         </Box>
 
                         {/*<Box mr={2}>*/}
@@ -158,17 +156,17 @@ const Header = () => {
                         {/*</Box>*/}
 
                         <Box mr={2}>
-                            <Button className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
+                            <Button name={'checkout'} className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
                         </Box>
 
                         {/*<Box mx={2}>*/}
                         {/*    <Button>CONTACT</Button>*/}
                         {/*</Box>*/}
 
-                        <Button component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
+                        <Button name={'signin'} component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
                     </Hidden>
                     <Box ml={2} mr={matchesXs ? 0 : (matchesSm ? 2 : 6)} className={classes.popoverContainer}>
-                        <IconButton aria-describedby={id} onClick={handleClick}>
+                        <IconButton name={'shoppingCart'} aria-describedby={id} onClick={handleClick}>
                             <Badge badgeContent={cartedProducts.length} color="secondary">
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
@@ -203,7 +201,7 @@ const Header = () => {
                                     null
                                     :
                                     <Box py={2} px={2}>
-                                        <Button className={classes.link} color={'secondary'} variant={'contained'}
+                                        <Button name={'checkout'} className={classes.link} color={'secondary'} variant={'contained'}
                                                 component={Link} href={'/checkout'} fullWidth>CHECKOUT</Button>
                                     </Box>
                                 }
@@ -212,7 +210,7 @@ const Header = () => {
                     </Box>
 
                     <Hidden mdUp>
-                        <IconButton onClick={handleDrawer}>
+                        <IconButton name={'showTabsIcon'} onClick={handleDrawer}>
                             <DehazeOutlinedIcon/>
                         </IconButton>
                     </Hidden>
@@ -223,24 +221,24 @@ const Header = () => {
                                     <ListItemText>
                                         <Grid container justify={'center'} alignItems={'center'}>
                                             <Box mx={4}>
-                                                <Image src={'/logo.png'} width={67} height={60}/>
+                                                <Image src={'/logo.png'} width={67} height={60} alt={'Logo'}/>
                                             </Box>
                                         </Grid>
                                     </ListItemText>
                                 </ListItem>
-                                <ListItem component={Link} href={'/'} color={'primary'} button>
+                                <ListItem name={'home'} component={Link} href={'/'} color={'primary'} button>
                                     <ListItemText primary={'HOME'}/>
                                 </ListItem>
                                 <Divider/>
-                                <ListItem component={Link} href={'/shop'} button>
+                                <ListItem name={'shop'} component={Link} href={'/shop'} button>
                                     <ListItemText primary={'SHOP'}/>
                                 </ListItem>
                                 <Divider/>
-                                <ListItem component={Link} href={'/checkout'} button>
+                                <ListItem name={'checkout'} component={Link} href={'/checkout'} button>
                                     <ListItemText primary={'CHECKOUT'}/>
                                 </ListItem>
                                 <Divider/>
-                                <ListItem component={Link} href={'/signin'} button>
+                                <ListItem name={'signin'} component={Link} href={'/signin'} button>
                                     <ListItemText primary={'SIGNIN'}/>
                                 </ListItem>
                                 <Divider/>
