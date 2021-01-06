@@ -30,6 +30,7 @@ export default function MyApp(props) {
                 <meta name='description' content='An Ecommerce website from where the users can buy different things according to their choice. Developed by M Afzaal Afzal'/>
                 <meta name='keywords' content='E-Commerce Web App by M Afzaal Afzal'/>
                 <link rel="manifest" href="/manifest.json"/>
+                <link rel="apple-touch-icon" href="/icon-192x192.png"/>
                 <meta name="theme-color" content='#556cd6'/>
             </Head>
             <ThemeProvider theme={theme}>
