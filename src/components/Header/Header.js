@@ -144,11 +144,11 @@ const Header = () => {
                     </Box>
 
                     <Hidden smDown>
-                        <Button name={'home'} className={classes.link} component={Link} href={'/'}>HOME</Button>
+                        <Button name={'home'} color={'secondary'} className={classes.link} component={Link} href={'/'}>HOME</Button>
 
                         <Box mx={2}>
 
-                            <Button name={'shop'} className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
+                            <Button name={'shop'} color={'secondary'} className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
                         </Box>
 
                         {/*<Box mr={2}>*/}
@@ -156,18 +156,18 @@ const Header = () => {
                         {/*</Box>*/}
 
                         <Box mr={2}>
-                            <Button name={'checkout'} className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
+                            <Button name={'checkout'} color={'secondary'} className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
                         </Box>
 
                         {/*<Box mx={2}>*/}
                         {/*    <Button>CONTACT</Button>*/}
                         {/*</Box>*/}
 
-                        <Button name={'signin'} component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
+                        <Button name={'signin'} color={'secondary'} component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
                     </Hidden>
                     <Box ml={2} mr={matchesXs ? 0 : (matchesSm ? 2 : 6)} className={classes.popoverContainer}>
-                        <IconButton name={'shoppingCart'} aria-describedby={id} onClick={handleClick}>
-                            <Badge badgeContent={cartedProducts.length} color="secondary">
+                        <IconButton color={'secondary'} name={'shoppingCart'} aria-describedby={id} onClick={handleClick}>
+                            <Badge badgeContent={cartedProducts.length} color="primary">
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
                         </IconButton>
@@ -201,7 +201,7 @@ const Header = () => {
                                     null
                                     :
                                     <Box py={2} px={2}>
-                                        <Button name={'checkout'} className={classes.link} color={'secondary'} variant={'contained'}
+                                        <Button  name={'checkout'} className={classes.link} color={'secondary'} variant={'contained'}
                                                 component={Link} href={'/checkout'} fullWidth>CHECKOUT</Button>
                                     </Box>
                                 }
@@ -210,7 +210,7 @@ const Header = () => {
                     </Box>
 
                     <Hidden mdUp>
-                        <IconButton name={'showTabsIcon'} onClick={handleDrawer}>
+                        <IconButton color={'secondary'} name={'showTabsIcon'} onClick={handleDrawer}>
                             <DehazeOutlinedIcon/>
                         </IconButton>
                     </Hidden>

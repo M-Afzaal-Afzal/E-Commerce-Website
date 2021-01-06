@@ -13,10 +13,23 @@ export default class MyDocument extends Document {
 
                     <meta charSet='utf-8'/>
                     <link rel="manifest" href="/manifest.json"/>
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                    />
+                    {/*<link*/}
+                    {/*    rel="stylesheet"*/}
+                    {/*    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"*/}
+                    {/*/>*/}
+                    <link rel="preconnect"
+                          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                          crossOrigin/>
+
+
+                    <link rel="preload" as="style"
+                          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+
+
+                    <link rel="stylesheet" media="print"
+                          onLoad="this.onload=null;this.removeAttribute('media');"
+                          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+
                 </Head>
                 <body>
                 <Main/>
