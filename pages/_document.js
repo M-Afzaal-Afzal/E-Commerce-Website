@@ -10,6 +10,14 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
+            <title>Clothing App by M Afzaal Afzal</title>
+            <meta charSet='utf-8'/>
+            <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+            <meta name='viewport'
+                  content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+            <meta name='description' content='An Ecommerce webApp from where the users can buy different things according to their choice. Developed by M Afzaal Afzal'/>
+            <meta name='keywords' content='E-Commerce Web App by M Afzaal Afzal'/>
+            <link rel="manifest" href="/manifest.json"/>
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

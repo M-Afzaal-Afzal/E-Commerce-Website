@@ -8,7 +8,7 @@ import Link from '../src/utils/Link';
 import Layout from "../src/components/Layout/Layout";
 import {motion} from "framer-motion";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     gridContainer: {
         width: '100%',
         margin: '0'

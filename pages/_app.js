@@ -23,7 +23,14 @@ export default function MyApp(props) {
         <React.Fragment>
             <Head>
                 <title>Clothing App by M Afzaal Afzal</title>
-                <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
+                <meta charSet='utf-8'/>
+                <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+                <meta name='viewport'
+                      content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+                <meta name='description' content='An Ecommerce website from where the users can buy different things according to their choice. Developed by M Afzaal Afzal'/>
+                <meta name='keywords' content='E-Commerce Web App by M Afzaal Afzal'/>
+                <link rel="manifest" href="/manifest.json"/>
+                <meta name="theme-color" content='#556cd6'/>
             </Head>
             <ThemeProvider theme={theme}>
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
