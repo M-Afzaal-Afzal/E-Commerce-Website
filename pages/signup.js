@@ -42,8 +42,7 @@ const SignIn = () => {
         required: "Please Enter Your Real Name",
     })
 
-    const password = useRef({});
-    password.current = watch("password");
+    const password  = watch("password");
 
     const emailReg = register({
         required: "You must specify an email",
@@ -63,7 +62,7 @@ const SignIn = () => {
 
     const repeatPasswordReg = register({
         validate: value =>
-            value === password.current || "The passwords do not match"
+            value === password || "The passwords do not match"
     })
 
     const onSubmit = handleSubmit(data => {
