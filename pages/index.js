@@ -1,6 +1,4 @@
 import {Box, Button, Container, Grid, makeStyles, Typography, useMediaQuery, useTheme,} from "@material-ui/core";
-import {Fragment} from "react";
-import Header from "../src/components/Header/Header";
 import Image from 'next/image'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '../src/utils/Link';
 import Layout from "../src/components/Layout/Layout";
+import {motion} from "framer-motion";
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -18,8 +17,28 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             textDecoration: 'none',
         }
-    }
+    },
+    cardContainer: {
+        boxShadow: 'rgba(19, 15, 235, 0.1) 2px 4px 40px',
+        transition: 'all .5s',
+        '&:hover': {
+            boxShadow: 'rgba(19, 15, 235, 0.3) 2px 4px 40px',
+        }
+    },
 }))
+
+const containerVariants = {
+    visible: {
+        opacity: 1,
+        transition: {
+            ease: 'easeInOut',
+            duration: .5,
+        }
+    },
+    hidden: {
+        opacity: 0,
+    },
+}
 
 const Index = () => {
 
@@ -64,7 +83,10 @@ const Index = () => {
     return (
         <Layout>
             <Box mt={matchesXs ? 12 : 18}>
-                <Grid container direction={'column'}>
+                <Grid container direction={'column'}  component={motion.div}
+                      animate={'visible'}
+                      initial={'hidden'}
+                      variants={containerVariants}>
 
                     <Container maxWidth={'lg'} disableGutters>
                         <Grid item container spacing={2} align={'center'} className={classes.gridContainer}>
@@ -72,8 +94,8 @@ const Index = () => {
                                 products.map(product => {
                                     return (
                                         <Grid item container justify={'center'} sm={6} md={4} key={product.name}>
-                                            <Card>
-                                                <CardActionArea disableRipple>
+                                            <Card elevation={0} className={classes.cardContainer}>
+                                                <CardActionArea disabled disableRipple>
                                                     <Image src={product.img} width={400} height={400}/>
                                                     <CardContent>
                                                         <Grid container justify={'center'}>
