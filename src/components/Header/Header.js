@@ -140,7 +140,7 @@ const Header = () => {
 
                     <Box ml={matchesSm ? 0 : 6} my={2} className={classes.logo}>
                         <Box component={Link} href={'/'}>
-                            <Image src={'/logo.png'} width={matchesXs ? 40 : 60} height={matchesXs ? 40 : 60}
+                            <Image src={'/logo.png'} width={matchesXs ? 33 : 67} height={matchesXs ? 40 : 60}
                                    alt={'Logo'}/>
                         </Box>
                     </Box>
@@ -223,7 +223,7 @@ const Header = () => {
                                     <ListItemText>
                                         <Grid container justify={'center'} alignItems={'center'}>
                                             <Box mx={4}>
-                                                <Image src={'/logo.png'} width={60} height={60}/>
+                                                <Image src={'/logo.png'} width={67} height={60}/>
                                             </Box>
                                         </Grid>
                                     </ListItemText>
