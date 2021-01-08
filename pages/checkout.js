@@ -39,11 +39,7 @@ const containerVariants = {
         opacity: 0,
     },
     exit: {
-        x: '-100vh',
-        transition: {
-            ease: 'easeIn',
-            duration: .6
-        }
+        opacity: 0,
     }
 }
 
@@ -193,10 +189,10 @@ const Checkout = () => {
                                                       layout
                                                       component={motion.div}
                                                       variants={containerVariants}
-                                                      initial={{opacity: 0}}
-                                                      animate={{opacity:1}}
+                                                      initial={'hidden'}
+                                                      animate={'visible'}
                                                       whileHover={'hover'}
-                                                      exit={{opacity: 0}}
+                                                      exit={'exit'}
                                                 >
                                                     <Grid item className={classes.cardImageContainer} component={Box}
                                                           boxShadow={3}>
