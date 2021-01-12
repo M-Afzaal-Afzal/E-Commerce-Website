@@ -295,15 +295,15 @@ const Checkout = () => {
                                 })}
                             </AnimatePresence>
 
-                            <Grid style={{justifyContent: 'space-around', marginTop: '80px'}} item container
+                            <Grid component={motion.div} layout style={{justifyContent: 'space-around', marginTop: '80px'}} item container
                                   jusify={'space-around'} alignItems={'center'}>
-                                <Grid item>
+                                <Grid item component={motion.div} layout>
                                     <Box>
                                         <Typography color={'secondary'} variant={matchesSm ? 'h6' : 'h5'}>GRAND
                                             TOTAL</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item>
+                                <Grid item component={motion.div} layout>
                                     <Box>
                                         <Typography color={'secondary'} variant={matchesSm ? 'h6' : 'h5'}>
                                             $ {cartedProducts
@@ -313,7 +313,7 @@ const Checkout = () => {
                                     </Box>
                                 </Grid>
                             </Grid>
-                            <Grid item container justify={'center'}>
+                            <Grid component={motion.div} layout item container justify={'center'}>
                                 <Box mt={5} mb={10}>
                                     <Button name={'pay now'} size={"large"} variant={'contained'}
                                             color={'secondary'}>
