@@ -5,7 +5,7 @@ import {
     Badge,
     Box,
     Button, Drawer,
-    Grid, Hidden, Icon,
+    Grid, Hidden,
     IconButton,
     makeStyles, Paper,
     Popover,
@@ -20,8 +20,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import {auth} from '../../firebaseUtils/firebaseUtils'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     logo: {
         display: 'flex',
         alignItems: 'center',
@@ -55,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Header = () => {
+const Header = (props) => {
 
     const hatsProducts = useSelector(state => state.hats.products);
     const mensProducts = useSelector(state => state.mens.products);
@@ -144,11 +145,13 @@ const Header = () => {
                     </Box>
 
                     <Hidden smDown>
-                        <Button name={'home'} color={'secondary'} className={classes.link} component={Link} href={'/'}>HOME</Button>
+                        <Button name={'home'} color={'secondary'} className={classes.link} component={Link}
+                                href={'/'}>HOME</Button>
 
                         <Box mx={2}>
 
-                            <Button name={'shop'} color={'secondary'} className={classes.link} component={Link} href={'/shop'}>SHOP</Button>
+                            <Button name={'shop'} color={'secondary'} className={classes.link} component={Link}
+                                    href={'/shop'}>SHOP</Button>
                         </Box>
 
                         {/*<Box mr={2}>*/}
@@ -156,17 +159,40 @@ const Header = () => {
                         {/*</Box>*/}
 
                         <Box mr={2}>
-                            <Button name={'checkout'} color={'secondary'} className={classes.link} component={Link} href={'/checkout'}>CHECKOUT</Button>
+                            <Button name={'checkout'} color={'secondary'} className={classes.link} component={Link}
+                                    href={'/checkout'}>CHECKOUT</Button>
                         </Box>
 
                         {/*<Box mx={2}>*/}
                         {/*    <Button>CONTACT</Button>*/}
                         {/*</Box>*/}
-
-                        <Button name={'signin'} color={'secondary'} component={Link} className={classes.link} href={'/signin'}>SIGN IN</Button>
+                        {
+                            props.isLoggedIn ?
+                                (
+                                    <Button name={'signout'}
+                                            color={'secondary'}
+                                            onClick={() => auth.signOut()}
+                                            className={classes.link}
+                                    >
+                                        SIGN OUT
+                                    </Button>
+                                )
+                                :
+                                (
+                                    <Button name={'signin'}
+                                            color={'secondary'}
+                                            component={Link}
+                                            className={classes.link}
+                                            href={'/signin'}
+                                    >
+                                        SIGN IN
+                                    </Button>
+                                )
+                        }
                     </Hidden>
                     <Box ml={2} mr={matchesXs ? 0 : (matchesSm ? 2 : 6)} className={classes.popoverContainer}>
-                        <IconButton color={'secondary'} name={'shoppingCart'} aria-describedby={id} onClick={handleClick}>
+                        <IconButton color={'secondary'} name={'shoppingCart'} aria-describedby={id}
+                                    onClick={handleClick}>
                             <Badge badgeContent={cartedProducts.length} color="primary">
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
@@ -201,7 +227,8 @@ const Header = () => {
                                     null
                                     :
                                     <Box py={2} px={2}>
-                                        <Button  name={'checkout'} className={classes.link} color={'secondary'} variant={'contained'}
+                                        <Button name={'checkout'} className={classes.link} color={'secondary'}
+                                                variant={'contained'}
                                                 component={Link} href={'/checkout'} fullWidth>CHECKOUT</Button>
                                     </Box>
                                 }
@@ -238,9 +265,18 @@ const Header = () => {
                                     <ListItemText primary={'CHECKOUT'}/>
                                 </ListItem>
                                 <Divider/>
-                                <ListItem name={'signin'} component={Link} href={'/signin'} button>
-                                    <ListItemText primary={'SIGNIN'}/>
-                                </ListItem>
+
+                                {
+                                    props.isLoggedIn ?
+                                        (<ListItem name={'signout'} component={Link} href={''} onClick={() => auth.signOut()} button>
+                                            <ListItemText primary={'SIGN OUT'}/>
+                                        </ListItem>)
+                                        :
+                                        (<ListItem name={'signin'} component={Link} href={'/signin'} button>
+                                            <ListItemText primary={'SIGNIN'}/>
+                                        </ListItem>)
+                                }
+
                                 <Divider/>
                             </List>
                         </Box>

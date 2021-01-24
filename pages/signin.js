@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
-    Button,
+    Button, CircularProgress,
     Container,
     FormControl,
     Grid,
@@ -15,6 +15,7 @@ import {
 import Link from '../src/utils/Link'
 import {signInWithGoogle} from "../src/firebaseUtils/firebaseUtils";
 import {useForm} from 'react-hook-form';
+import {auth} from '../src/firebaseUtils/firebaseUtils';
 
 const useStyles = makeStyles(() => ({
     cardContainer: {
@@ -36,16 +37,26 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = () => {
 
-    const {register, handleSubmit, errors, control} = useForm();
+    const {register, handleSubmit, errors, control, reset} = useForm();
 
-    const onSubmit = handleSubmit(data => {
+    const [isLoading, setIsLoading] = useState(false);
 
-        console.log(data);
-        console.log(data.email);
-        console.log(data.password);
+    const onSubmit = handleSubmit(async data => {
 
-        // console.log(errors)
-        // return (alert(JSON.stringify(data)));
+        try {
+            setIsLoading(true);
+            await auth.signInWithEmailAndPassword(data.email, data.password);
+            setIsLoading(false);
+            reset();
+        } catch (err) {
+            setIsLoading(false);
+            console.log(err.message)
+        }
+
+        // console.log(data);
+        // console.log(data.email);
+        // console.log(data.password);
+
     })
 
 
@@ -127,10 +138,24 @@ const SignIn = () => {
                                             </Box>
                                         </Grid>
                                         <Grid item container justify={'center'}>
-                                            <Box mt={5} mb={-2} style={{width: '90%'}}>
-                                                <Button name={'sign in'} type={'submit'} fullWidth size={'large'}
-                                                        color={'primary'} variant={'contained'}>Sign
-                                                    In</Button>
+                                            {
+                                                isLoading ?
+                                                    (<Box mt={2}>
+                                                        <CircularProgress color={'primary'}/>
+                                                    </Box>)
+                                                    :
+                                                    (' ')
+                                            }
+                                            <Box mt={isLoading ? 2 : 5} mb={-2} style={{width: '90%'}}>
+                                                <Button
+                                                    name={'sign in'}
+                                                    type={'submit'}
+                                                    fullWidth
+                                                    size={'large'}
+                                                    color={'primary'} variant={'contained'}
+                                                >
+                                                    Sign In
+                                                </Button>
                                             </Box>
                                         </Grid>
 
@@ -147,8 +172,8 @@ const SignIn = () => {
                                                 <Button
                                                     name={'Don\'t have account, go to signup'}
                                                     style={{textAlign: 'center'}} className={classes.link}
-                                                        component={Link} href={'/signup'}
-                                                        color={'secondary'}>Don't have account, go to signup</Button>
+                                                    component={Link} href={'/signup'}
+                                                    color={'secondary'}>Don't have account, go to signup</Button>
                                             </Box>
                                         </Grid>
 

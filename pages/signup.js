@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useState} from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
@@ -12,10 +12,11 @@ import {
     useMediaQuery,
     useTheme
 } from "@material-ui/core";
-import Link from '../src/utils/Link';
 import {useForm} from "react-hook-form";
+import {auth, createUserProfileDocument} from '../src/firebaseUtils/firebaseUtils';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     cardContainer: {
         maxWidth: '450px',
         padding: '25px',
@@ -36,13 +37,14 @@ const useStyles = makeStyles(theme => ({
 const SignIn = () => {
 
     const classes = useStyles();
-    const {register, handleSubmit, errors,control,watch} = useForm();
+    const {register, handleSubmit, errors, control, watch, reset} = useForm();
+    const [isLoading, setIsLoading] = useState(false);
 
     const nameReg = register({
         required: "Please Enter Your Real Name",
     })
 
-    const password  = watch("password");
+    const password = watch("password");
 
     const emailReg = register({
         required: "You must specify an email",
@@ -65,8 +67,21 @@ const SignIn = () => {
             value === password || "The passwords do not match"
     })
 
-    const onSubmit = handleSubmit(data => {
+    const onSubmit = handleSubmit(async data => {
         console.log(data);
+        const {name, email, password} = data;
+        // console.log(name, email, password, repeatPassword);
+
+        try {
+            setIsLoading(true);
+            const {user} = await auth.createUserWithEmailAndPassword(email, password);
+            await createUserProfileDocument(user, {displayName: name})
+            setIsLoading(false);
+            reset();
+        } catch (err) {
+            setIsLoading(false)
+            console.log(err.message)
+        }
     })
 
     const theme = useTheme();
@@ -96,7 +111,8 @@ const SignIn = () => {
                                             <TextField
                                                 size={"small"}
                                                 type={'text'}
-                                                fullWidth id="name"
+                                                fullWidth
+                                                id="name"
                                                 helperText={errors.name ? errors.name.message : ''}
                                                 name={'name'}
                                                 error={Boolean(errors.name)}
@@ -107,7 +123,7 @@ const SignIn = () => {
                                     </Grid>
                                     <Grid item container justify={'center'}>
                                         <Box mt={5} style={{width: '90%'}}>
-                                            <TextField size={"small"} type={'email'} fullWidth id="outlined-basic"
+                                            <TextField size={"small"} type={'email'} fullWidth id="email"
                                                        label="E-Mail" variant="outlined"
                                                        name={'email'}
                                                        helperText={errors.email ? errors.email.message : ''}
@@ -124,7 +140,7 @@ const SignIn = () => {
                                                        label="Password"
                                                        variant="outlined"
                                                        name={'password'}
-                                                       helperText={errors.password ? errors.password.message: ''}
+                                                       helperText={errors.password ? errors.password.message : ''}
                                                        error={Boolean(errors.password)}
                                                        inputRef={passwordReg}
                                                        aria-controls={control}
@@ -137,15 +153,25 @@ const SignIn = () => {
                                                        label="Confirm Password" variant="outlined"
                                                        name={'repeatPassword'}
                                                        error={Boolean(errors.repeatPassword)}
-                                                       helperText={errors.repeatPassword ? errors.repeatPassword.message: ''}
+                                                       helperText={errors.repeatPassword ? errors.repeatPassword.message : ''}
                                                        inputRef={repeatPasswordReg}
                                                        aria-controls={control}
                                             />
                                         </Box>
                                     </Grid>
-                                    <Grid item container justify={'center'}>
+                                    <Grid item container direction={'column'} alignItems={'center'} justify={'center'}>
+                                        {
+                                            isLoading ?
+                                                (<Box mt={3} mb={-2} mx={'auto'}>
+                                                    <CircularProgress color={'primary'}/>
+                                                </Box>)
+                                                :
+                                                ('')
+                                        }
+
                                         <Box mt={5} mb={2} style={{width: '90%'}}>
-                                            <Button name={'sign_up'} type={"submit"} fullWidth size={'large'} color={'primary'} variant={'contained'}>Sign
+                                            <Button name={'sign_up'} type={"submit"} fullWidth size={'large'}
+                                                    color={'primary'} variant={'contained'}>Sign
                                                 up</Button>
                                         </Box>
                                     </Grid>
