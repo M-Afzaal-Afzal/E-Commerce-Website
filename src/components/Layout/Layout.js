@@ -33,7 +33,7 @@ const Layout = ({children}) => {
         return () => {
             unsubscribeFromAuth();
         }
-    })
+    },[])
 
     // useEffect(() => {
     //     unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
