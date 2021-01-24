@@ -8,7 +8,6 @@ import {
     makeStyles,
     Typography,
     useMediaQuery,
-    useTheme
 } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -142,4 +141,4 @@ const ProductsList = (props) => {
     )
 };
 
-export default ProductsList;
+export default React.memo(ProductsList);

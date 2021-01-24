@@ -39,4 +39,4 @@ const Women = () => {
     )
 };
 
-export default Women;
+export default React.memo(Women);

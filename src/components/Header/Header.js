@@ -272,7 +272,8 @@ const Header = () => {
 
                                 {
                                     isLoggedIn ?
-                                        (<ListItem name={'signout'} component={Link} href={''} onClick={() => auth.signOut()} button>
+                                        (<ListItem name={'signout'} component={Link} href={''}
+                                                   onClick={() => auth.signOut()} button>
                                             <ListItemText primary={'SIGN OUT'}/>
                                         </ListItem>)
                                         :
@@ -292,4 +293,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);

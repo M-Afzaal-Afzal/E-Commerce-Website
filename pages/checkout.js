@@ -295,7 +295,8 @@ const Checkout = () => {
                                 })}
                             </AnimatePresence>
 
-                            <Grid component={motion.div} layout style={{justifyContent: 'space-around', marginTop: '80px'}} item container
+                            <Grid component={motion.div} layout
+                                  style={{justifyContent: 'space-around', marginTop: '80px'}} item container
                                   jusify={'space-around'} alignItems={'center'}>
                                 <Grid item component={motion.div} layout>
                                     <Box>
@@ -335,4 +336,4 @@ const Checkout = () => {
     );
 }
 
-export default Checkout;
+export default React.memo(Checkout);

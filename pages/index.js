@@ -83,7 +83,7 @@ const Index = () => {
     return (
         <Layout>
             <Box mt={matchesXs ? 12 : 18}>
-                <Grid container direction={'column'}  component={motion.div}
+                <Grid container direction={'column'} component={motion.div}
                       animate={'visible'}
                       initial={'hidden'}
                       variants={containerVariants}>
@@ -96,7 +96,8 @@ const Index = () => {
                                         <Grid item container justify={'center'} sm={6} md={4} key={product.name}>
                                             <Card elevation={0} className={classes.cardContainer}>
                                                 <CardActionArea disabled disableRipple>
-                                                    <Image src={product.img} width={350} height={350} alt={product.name}/>
+                                                    <Image src={product.img} width={350} height={350}
+                                                           alt={product.name}/>
                                                     <CardContent>
                                                         <Grid container justify={'center'}>
                                                             <Typography color={'primary'} variant={'h5'}>
@@ -109,8 +110,9 @@ const Index = () => {
                                                     <Grid container justify={'center'}>
                                                         <Button
                                                             name={'Shop ' + product.name}
-                                                            variant={'contained'} className={classes.linkButton} component={Link}
-                                                                href={product.productsUrl} size="large" color="primary">
+                                                            variant={'contained'} className={classes.linkButton}
+                                                            component={Link}
+                                                            href={product.productsUrl} size="large" color="primary">
                                                             SHOP NOW
                                                         </Button>
                                                     </Grid>
@@ -131,4 +133,4 @@ const Index = () => {
     );
 }
 
-export default Index;
+export default React.memo(Index);

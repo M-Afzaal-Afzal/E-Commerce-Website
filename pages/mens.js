@@ -3,6 +3,7 @@ import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import Layout from "../src/components/Layout/Layout";
 import {Box} from "@material-ui/core";
+import * as React from "react";
 
 
 const Mens = () => {
@@ -37,4 +38,4 @@ const Mens = () => {
     )
 };
 
-export default Mens;
+export default React.memo(Mens);

@@ -37,4 +37,4 @@ const Jackets = () => {
     )
 };
 
-export default Jackets;
+export default React.memo(Jackets);

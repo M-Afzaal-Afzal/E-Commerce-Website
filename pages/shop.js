@@ -3,6 +3,7 @@ import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import {Box, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import Layout from "../src/components/Layout/Layout";
+import * as React from "react";
 
 
 const Shop = () => {
@@ -153,4 +154,4 @@ const Shop = () => {
     )
 };
 
-export default Shop;
+export default React.memo(Shop);

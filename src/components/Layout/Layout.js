@@ -19,10 +19,11 @@ const Layout = ({children}) => {
                 const userRef = await createUserProfileDocument(user);
 
                 userRef.onSnapshot(snapshot => {
-                    dispatch(actions.setCurrentUser({
+                    const user ={
                         id: snapshot.id,
                         ...snapshot.data()
-                    }))
+                    }
+                    dispatch(actions.setCurrentUser(user));
                 })
 
             } else {

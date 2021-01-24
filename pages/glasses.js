@@ -38,4 +38,4 @@ const Glasses = () => {
     )
 };
 
-export default Glasses;
+export default React.memo(Glasses);

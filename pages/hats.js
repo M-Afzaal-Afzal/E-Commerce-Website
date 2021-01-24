@@ -39,4 +39,4 @@ const Hats = () => {
     )
 };
 
-export default Hats;
+export default React.memo(Hats);

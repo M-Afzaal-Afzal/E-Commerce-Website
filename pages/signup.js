@@ -186,4 +186,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default React.memo(SignIn);

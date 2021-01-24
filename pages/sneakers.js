@@ -34,4 +34,4 @@ const Sneakers = () => {
     )
 };
 
-export default Sneakers;
+export default React.memo(Sneakers);
