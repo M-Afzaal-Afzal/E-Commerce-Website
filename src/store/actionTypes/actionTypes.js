@@ -22,3 +22,5 @@ export const SUB_ONE_JACKET = 'SUB_ONE_JACKET';
 export const TOGGLE_GLASS_CART = 'TOGGLE_GLASS_CART';
 export const ADD_ONE_GLASS = 'ADD_ONE_GLASS';
 export const SUB_ONE_GLASS = 'SUB_ONE_GLASS';
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';

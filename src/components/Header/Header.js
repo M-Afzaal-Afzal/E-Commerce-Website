@@ -56,7 +56,11 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const Header = (props) => {
+const Header = () => {
+
+    const isLoggedIn = Boolean(useSelector(state => state.user.currentUser));
+
+    console.log(isLoggedIn)
 
     const hatsProducts = useSelector(state => state.hats.products);
     const mensProducts = useSelector(state => state.mens.products);
@@ -167,7 +171,7 @@ const Header = (props) => {
                         {/*    <Button>CONTACT</Button>*/}
                         {/*</Box>*/}
                         {
-                            props.isLoggedIn ?
+                            isLoggedIn ?
                                 (
                                     <Button name={'signout'}
                                             color={'secondary'}
@@ -267,7 +271,7 @@ const Header = (props) => {
                                 <Divider/>
 
                                 {
-                                    props.isLoggedIn ?
+                                    isLoggedIn ?
                                         (<ListItem name={'signout'} component={Link} href={''} onClick={() => auth.signOut()} button>
                                             <ListItemText primary={'SIGN OUT'}/>
                                         </ListItem>)

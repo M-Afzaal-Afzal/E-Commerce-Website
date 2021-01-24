@@ -5,6 +5,7 @@ import jacketsReducer from './jackets.reducer';
 import mensReducer from './mens.reducer';
 import womensReducer from './women.reducer';
 import sneakersReducer from './sneakers.reducer';
+import userReducer from './user.reducer';
 
 
 
@@ -16,6 +17,7 @@ const reducers = {
     mens: mensReducer,
     jackets: jacketsReducer,
     glasses: glassesReducer,
+    user: userReducer,
 }
 
 export default combineReducers(reducers)
