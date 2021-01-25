@@ -72,6 +72,12 @@ const Header = () => {
     const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
 
     const cartedProducts = allProducts.filter(product => product.isAddedToCart);
+
+    const quantityArr = cartedProducts.map((product) => product.quantity);
+
+    const quantity = quantityArr.reduce((preVal,curVal) => preVal + curVal,0);
+    console.log(quantityArr)
+    console.log(quantity);
     // console.log(cartedProducts);
 
 
@@ -197,7 +203,7 @@ const Header = () => {
                     <Box ml={2} mr={matchesXs ? 0 : (matchesSm ? 2 : 6)} className={classes.popoverContainer}>
                         <IconButton color={'secondary'} name={'shoppingCart'} aria-describedby={id}
                                     onClick={handleClick}>
-                            <Badge badgeContent={cartedProducts.length} color="primary">
+                            <Badge badgeContent={quantity} max={100000} color="primary">
                                 <ShoppingCartOutlinedIcon/>
                             </Badge>
                         </IconButton>
