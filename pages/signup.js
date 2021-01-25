@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
@@ -15,6 +15,8 @@ import {
 import {useForm} from "react-hook-form";
 import {auth, createUserProfileDocument} from '../src/firebaseUtils/firebaseUtils';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {useSelector} from "react-redux";
+import {useRouter} from "next/router";
 
 const useStyles = makeStyles(() => ({
     cardContainer: {
@@ -36,9 +38,18 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = () => {
 
+    const user = useSelector(state => state.user.currentUser);
+    const router = useRouter();
+
     const classes = useStyles();
     const {register, handleSubmit, errors, control, watch, reset} = useForm();
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            router.push('/');
+        }
+    },[user])
 
     const nameReg = register({
         required: "Please Enter Your Real Name",
@@ -78,6 +89,7 @@ const SignIn = () => {
             await createUserProfileDocument(user, {displayName: name})
             setIsLoading(false);
             reset();
+            router.push('/');
         } catch (err) {
             setIsLoading(false)
             console.log(err.message)

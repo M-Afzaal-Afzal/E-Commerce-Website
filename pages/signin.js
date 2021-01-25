@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../src/components/Layout/Layout";
 import {
     Box,
@@ -16,6 +16,8 @@ import Link from '../src/utils/Link'
 import {signInWithGoogle} from "../src/firebaseUtils/firebaseUtils";
 import {useForm} from 'react-hook-form';
 import {auth} from '../src/firebaseUtils/firebaseUtils';
+import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(() => ({
     cardContainer: {
@@ -37,6 +39,9 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = () => {
 
+    const router = useRouter();
+    const user = useSelector(state => state.user.currentUser);
+
     const {register, handleSubmit, errors, control, reset} = useForm();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +53,7 @@ const SignIn = () => {
             await auth.signInWithEmailAndPassword(data.email, data.password);
             setIsLoading(false);
             reset();
+            router.replace('/');
         } catch (err) {
             setIsLoading(false);
             console.log(err.message)
@@ -77,6 +83,12 @@ const SignIn = () => {
     })
 
     const classes = useStyles();
+
+    useEffect(() => {
+       if (user) {
+           router.replace('/');
+       }
+    },[user])
 
     // const [email,setEmail] = useState('');
     // const [password,setPassword]=useState('');
