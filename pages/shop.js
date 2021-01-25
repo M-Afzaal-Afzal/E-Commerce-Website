@@ -4,7 +4,7 @@ import ProductsList from "../src/components/ProductsList/ProductsList";
 import {Box, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import Layout from "../src/components/Layout/Layout";
 import React from "react";
-
+import * as selectors from '../src/store/selectors/index.selectors'
 
 const Shop = () => {
 
@@ -12,28 +12,16 @@ const Shop = () => {
 
     const dispatch = useDispatch();
 
-    const sneakerProducts = useSelector(state => {
-        return state.sneakers.products.slice(0, 4);
-    });
-    const hatProducts = useSelector(state => {
-        return state.hats.products.slice(0, 4);
-    })
+    const sneakerProducts = useSelector(selectors.selectSneakersProducts);
+    const hatProducts = useSelector(selectors.selectHatsProducts)
 
-    const menProducts = useSelector(state => {
-        return state.mens.products.slice(0, 4);
-    })
+    const menProducts = useSelector(selectors.selectMensProducts)
 
-    const womenProducts = useSelector(state => {
-        return state.womens.products.slice(0, 4);
-    })
+    const womenProducts = useSelector(selectors.selectWomensProducts)
 
-    const glassProducts = useSelector(state => {
-        return state.glasses.products.slice(0, 4);
-    })
+    const glassProducts = useSelector(selectors.selectGlassesProducts)
 
-    const jacketProducts = useSelector(state => {
-        return state.jackets.products.slice(0, 4);
-    })
+    const jacketProducts = useSelector(selectors.selectJacketsProducts)
 
     // console.log(menProducts);
 

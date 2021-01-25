@@ -4,14 +4,13 @@ import ProductsList from "../src/components/ProductsList/ProductsList";
 import Layout from "../src/components/Layout/Layout";
 import {Box} from "@material-ui/core";
 import React from "react";
+import * as selectors from '../src/store/selectors/index.selectors'
 
 
 const Mens = () => {
 
     const dispatch = useDispatch();
-    const products = useSelector(state => {
-        return state.mens.products;
-    })
+    const products = useSelector(selectors.selectMensProducts);
 
     // console.log(menProducts);
 
