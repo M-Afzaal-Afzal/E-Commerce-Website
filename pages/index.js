@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Link from '../src/utils/Link';
 import Layout from "../src/components/Layout/Layout";
 import {motion} from "framer-motion";
-import * as React from "react";
+import React from "react";
 
 const useStyles = makeStyles(() => ({
     gridContainer: {

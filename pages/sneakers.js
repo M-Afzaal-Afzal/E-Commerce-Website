@@ -2,6 +2,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import Layout from "../src/components/Layout/Layout";
+import React from "react";
 
 
 const Sneakers = () => {
