@@ -21,6 +21,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import {auth} from '../../firebaseUtils/firebaseUtils'
+import {createSelector} from "reselect";
+
+import * as selectors from '../../store/selectors/index.selectors'
+
+// const selectHats = state => state.hats;
+// const selectMens = state => state.mens;
+// const selectWomens = state => state.womens;
+// const selectSneakers = state => state.sneakers;
+// const selectGlasses = state => state.glasses;
+// const selectJackets = state => state.jackets;
+//
+// const selectHatsProducts = createSelector(
+//     [selectHats],
+//     (hats) => hats.products
+// )
 
 const useStyles = makeStyles(() => ({
     logo: {
@@ -62,12 +77,12 @@ const Header = () => {
 
     console.log(isLoggedIn)
 
-    const hatsProducts = useSelector(state => state.hats.products);
-    const mensProducts = useSelector(state => state.mens.products);
-    const womensProducts = useSelector(state => state.womens.products);
-    const sneakersProducts = useSelector(state => state.sneakers.products);
-    const glassesProducts = useSelector(state => state.glasses.products);
-    const jacketsProducts = useSelector(state => state.jackets.products);
+    const hatsProducts = useSelector(selectors.selectHatsProducts);
+    const mensProducts = useSelector(selectors.selectMensProducts);
+    const womensProducts = useSelector(selectors.selectWomensProducts);
+    const sneakersProducts = useSelector(selectors.selectSneakersProducts);
+    const glassesProducts = useSelector(selectors.selectGlassesProducts);
+    const jacketsProducts = useSelector(selectors.selectJacketsProducts);
 
     const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
 

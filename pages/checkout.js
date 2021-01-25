@@ -19,6 +19,7 @@ import * as actions from '../src/store/actions/index.actions';
 import Layout from "../src/components/Layout/Layout";
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
+import * as selectors from "../src/store/selectors/index.selectors";
 
 const containerVariants = {
     visible: {
@@ -74,12 +75,12 @@ const Checkout = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const hatsProducts = useSelector(state => state.hats.products);
-    const mensProducts = useSelector(state => state.mens.products);
-    const womensProducts = useSelector(state => state.womens.products);
-    const sneakersProducts = useSelector(state => state.sneakers.products);
-    const glassesProducts = useSelector(state => state.glasses.products);
-    const jacketsProducts = useSelector(state => state.jackets.products);
+    const hatsProducts = useSelector(selectors.selectHatsProducts);
+    const mensProducts = useSelector(selectors.selectMensProducts);
+    const womensProducts = useSelector(selectors.selectWomensProducts);
+    const sneakersProducts = useSelector(selectors.selectSneakersProducts);
+    const glassesProducts = useSelector(selectors.selectGlassesProducts);
+    const jacketsProducts = useSelector(selectors.selectJacketsProducts);
 
     const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
 
