@@ -6,9 +6,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/utils/theme';
 import {Provider} from 'react-redux'
 import {useStore} from '../src/store/store'
+import {persistStore} from "redux-persist";
+import {PersistGate} from 'redux-persist/integration/react'
+
 
 export default function MyApp(props) {
     const store = useStore(props.pageProps.initialReduxState)
+    let persistor = persistStore(store);
     const {Component, pageProps} = props;
 
     React.useEffect(() => {
@@ -38,7 +42,9 @@ export default function MyApp(props) {
             <CssBaseline/>
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
-                    <Component {...pageProps} />
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Component {...pageProps} />
+                    </PersistGate>
                 </Provider>
             </ThemeProvider>
         </React.Fragment>

@@ -2,13 +2,22 @@ import {useMemo} from 'react'
 import {applyMiddleware, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
-import reducers from './reducers/index.reducers'
+import rootReducer from './reducers/index.reducers'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 let store;
 
 function initStore(initialState) {
     return createStore(
-        reducers,
+        persistedReducer,
         initialState,
         composeWithDevTools(applyMiddleware(thunkMiddleware))
     )
