@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {
+    Badge,
     Box,
     Button,
     ButtonGroup,
@@ -68,8 +69,11 @@ const ProductsList = (props) => {
 
                                             <Card elevation={0} className={classes.cardContainer}>
                                                 <CardActionArea disabled disableRipple>
-                                                    <Image src={product.image} width={350} height={400}
-                                                           alt={product.name}/>
+                                                    <Badge overlap={'circle'} badgeContent={'C'} invisible={!product.isAddedToCart} color="primary">
+
+                                                        <Image src={product.image} width={350} height={400}
+                                                               alt={product.name}/>
+                                                    </Badge>
                                                     <CardContent>
                                                         <Grid container justify={'space-between'}>
                                                             <Typography color={'primary'}
@@ -98,10 +102,10 @@ const ProductsList = (props) => {
                                                             <Button
                                                                 name={props.cartedProducts ? 'Remove From Cart' : 'ADD TO CART'}
                                                                 fullWidth={matches310} size={'small'}
-                                                                onClick={props.cartedProducts ? () => props.removeFromCartHandler(product.category,product.id) : () => props.addToCartHandler(product,product.id)}
+                                                                onClick={props.cartedProducts ? () => props.removeFromCartHandler(product.category, product.id) : () => props.addToCartHandler(product, product.id)}
                                                                 color={'secondary'} variant={"contained"}>
                                                                 <Typography variant={'subtitle2'}>
-                                                                    {props.cartedProducts ? 'Remove From Cart' :'ADD TO CART'}
+                                                                    {props.cartedProducts ? 'Remove From Cart' : 'ADD TO CART'}
                                                                     {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
                                                                 </Typography>
                                                             </Button>
@@ -113,11 +117,11 @@ const ProductsList = (props) => {
                                                         }}>
                                                             <ButtonGroup color={'secondary'}>
                                                                 <Button name={'subOne'} size={'small'}
-                                                                        onClick={props.cartedProducts ? () => props.subHandler(product.id) : () => props.subHandler(product.category,product.id)}>
+                                                                        onClick={props.cartedProducts ? () => props.subHandler(product.id) : () => props.subHandler(product.category, product.id)}>
                                                                     <RemoveIcon fontSize="small"/>
                                                                 </Button>
                                                                 <Button name={'addOne'} size={'small'}
-                                                                        onClick={props.cartedProducts ? () => props.addHandler(product.id) : () => props.addHandler(product.category,product.id)}>
+                                                                        onClick={props.cartedProducts ? () => props.addHandler(product.id) : () => props.addHandler(product.category, product.id)}>
                                                                     <AddIcon fontSize={'small'}/>
                                                                 </Button>
                                                             </ButtonGroup>
