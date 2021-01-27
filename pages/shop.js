@@ -1,12 +1,12 @@
 import {useSelector, useDispatch} from 'react-redux';
-import * as actions from '../../src/store/actions/index.actions';
-import ProductsList from "../../src/components/ProductsList/ProductsList";
+import * as actions from '../src/store/actions/index.actions';
+import ProductsList from "../src/components/ProductsList/ProductsList";
 import {Box, Typography, useMediaQuery, useTheme} from "@material-ui/core";
-import Layout from "../../src/components/Layout/Layout";
+import Layout from "../src/components/Layout/Layout";
 import React from "react";
-import * as selectors from '../../src/store/selectors/index.selectors'
+import * as selectors from '../src/store/selectors/index.selectors'
 
-const Index = () => {
+const Shop = () => {
 
     const theme = useTheme();
 
@@ -156,4 +156,4 @@ const Index = () => {
     )
 };
 
-export default React.memo(Index);
+export default React.memo(Shop);
