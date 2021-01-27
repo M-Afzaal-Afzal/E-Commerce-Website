@@ -96,12 +96,12 @@ const ProductsList = (props) => {
                                                             width: matches310 ? '100%' : ''
                                                         }}>
                                                             <Button
-                                                                name={props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
+                                                                name={props.cartedProducts ? 'Remove From Cart' : 'ADD TO CART'}
                                                                 fullWidth={matches310} size={'small'}
-                                                                onClick={props.cartedProducts ? () => props.toggleCartHandler(product.id, product.category) : () => props.toggleCartHandler(product.id)}
+                                                                onClick={props.cartedProducts ? () => props.removeFromCartHandler(product.category,product.id) : () => props.addToCartHandler(product,product.id)}
                                                                 color={'secondary'} variant={"contained"}>
                                                                 <Typography variant={'subtitle2'}>
-                                                                    {props.cartedProducts ? 'Remove From Cart' : (product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART')}
+                                                                    {props.cartedProducts ? 'Remove From Cart' :'ADD TO CART'}
                                                                     {/*{product.isAddedToCart ? 'Remove From Cart' : 'ADD TO CART'}*/}
                                                                 </Typography>
                                                             </Button>
@@ -113,11 +113,11 @@ const ProductsList = (props) => {
                                                         }}>
                                                             <ButtonGroup color={'secondary'}>
                                                                 <Button name={'subOne'} size={'small'}
-                                                                        onClick={props.cartedProducts ? () => props.subHandler(product.id, product.category) : () => props.subHandler(product.id)}>
+                                                                        onClick={props.cartedProducts ? () => props.subHandler(product.id) : () => props.subHandler(product.category,product.id)}>
                                                                     <RemoveIcon fontSize="small"/>
                                                                 </Button>
                                                                 <Button name={'addOne'} size={'small'}
-                                                                        onClick={props.cartedProducts ? () => props.addHandler(product.id, product.category) : () => props.addHandler(product.id)}>
+                                                                        onClick={props.cartedProducts ? () => props.addHandler(product.id) : () => props.addHandler(product.category,product.id)}>
                                                                     <AddIcon fontSize={'small'}/>
                                                                 </Button>
                                                             </ButtonGroup>

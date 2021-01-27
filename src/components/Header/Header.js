@@ -77,16 +77,18 @@ const Header = () => {
 
     console.log(isLoggedIn)
 
-    const hatsProducts = useSelector(selectors.selectHatsProducts);
-    const mensProducts = useSelector(selectors.selectMensProducts);
-    const womensProducts = useSelector(selectors.selectWomensProducts);
-    const sneakersProducts = useSelector(selectors.selectSneakersProducts);
-    const glassesProducts = useSelector(selectors.selectGlassesProducts);
-    const jacketsProducts = useSelector(selectors.selectJacketsProducts);
+    // const hatsProducts = useSelector(selectors.selectHatsProducts);
+    // const mensProducts = useSelector(selectors.selectMensProducts);
+    // const womensProducts = useSelector(selectors.selectWomensProducts);
+    // const sneakersProducts = useSelector(selectors.selectSneakersProducts);
+    // const glassesProducts = useSelector(selectors.selectGlassesProducts);
+    // const jacketsProducts = useSelector(selectors.selectJacketsProducts);
+    //
+    // const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
+    //
+    // const cartedProducts = allProducts.filter(product => product.isAddedToCart);
 
-    const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
-
-    const cartedProducts = allProducts.filter(product => product.isAddedToCart);
+    const cartedProducts = useSelector(selectors.selectCartedProducts);
 
     const quantityArr = cartedProducts.map((product) => product.quantity);
 

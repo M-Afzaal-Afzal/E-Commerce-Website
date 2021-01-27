@@ -10,20 +10,21 @@ import * as selectors from '../src/store/selectors/index.selectors'
 const Hats = () => {
 
     const dispatch = useDispatch();
-    const products = useSelector(selectors.selectHatsProducts)
+    const products = useSelector(selectors.selectShopHats);
 
-    // console.log(menProducts);
 
-    const toggleCartHandler = (id) => {
-        dispatch(actions.toggleHatCart(id))
+
+    const addToCartHandler = (product,id) => {
+        dispatch(actions.addToCart(product,id));
+        dispatch(actions.isAddedToCartTrue(product.category,id));
     }
 
-    const addHandler = (id) => {
-        dispatch(actions.addOneHat(id))
+    const addHandler = (category,id) => {
+        dispatch(actions.addOneItem(category,id))
     }
 
-    const subHandler = (id) => {
-        dispatch(actions.subOneHat(id));
+    const subHandler = (category,id) => {
+        dispatch(actions.removeOneItem(category,id));
     }
 
     return (
@@ -31,7 +32,7 @@ const Hats = () => {
             <Box mt={-5}>
 
                 <ProductsList products={products} subHandler={subHandler} addHandler={addHandler}
-                              toggleCartHandler={toggleCartHandler}/>
+                              addToCartHandler={addToCartHandler}/>
             </Box>
         </Layout>
 

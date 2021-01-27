@@ -9,26 +9,26 @@ import * as selectors from '../src/store/selectors/index.selectors'
 const Sneakers = () => {
 
     const dispatch = useDispatch();
-    const products = useSelector(selectors.selectSneakersProducts);
+    const products = useSelector(selectors.selectShopSneakers);
 
-    // console.log(menProducts);
 
-    const toggleCartHandler = (id) => {
-        dispatch(actions.toggleSneakerCart(id))
+    const addToCartHandler = (product,id) => {
+        dispatch(actions.addToCart(product,id));
+        dispatch(actions.isAddedToCartTrue(product.category,id))
     }
 
-    const addHandler = (id) => {
-        dispatch(actions.addOneSneaker(id))
+    const addHandler = (category,id) => {
+        dispatch(actions.addOneItem(category,id))
     }
 
-    const subHandler = (id) => {
-        dispatch(actions.subOneSneaker(id));
+    const subHandler = (category,id) => {
+        dispatch(actions.removeOneItem(category,id));
     }
 
     return (
         <Layout>
             <ProductsList products={products} subHandler={subHandler} addHandler={addHandler}
-                          toggleCartHandler={toggleCartHandler}/>
+                          addToCartHandler={addToCartHandler}/>
         </Layout>
 
     )

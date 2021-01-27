@@ -4,27 +4,26 @@ import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import Layout from "../src/components/Layout/Layout";
 import {Box} from "@material-ui/core";
+import * as selectors from '../src/store/selectors/index.selectors';
 
 
 const Women = () => {
 
     const dispatch = useDispatch();
-    const products = useSelector(state => {
-        return state.womens.products;
-    })
+    const products = useSelector(selectors.selectShopWomens)
 
-    // console.log(menProducts);
 
-    const toggleCartHandler = (id) => {
-        dispatch(actions.toggleWomenCart(id))
+    const addToCartHandler = (product,id) => {
+        dispatch(actions.addToCart(product,id));
+        dispatch(actions.isAddedToCartTrue(product.category,id))
     }
 
-    const addHandler = (id) => {
-        dispatch(actions.addOneWomen(id))
+    const addHandler = (category,id) => {
+        dispatch(actions.addOneItem(category,id))
     }
 
-    const subHandler = (id) => {
-        dispatch(actions.subOneWomen(id));
+    const subHandler = (category,id) => {
+        dispatch(actions.removeOneItem(category,id));
     }
 
     return (
@@ -32,7 +31,7 @@ const Women = () => {
             <Box mt={-5}>
 
                 <ProductsList products={products} subHandler={subHandler} addHandler={addHandler}
-                              toggleCartHandler={toggleCartHandler}/>
+                              addToCartHandler={addToCartHandler}/>
             </Box>
         </Layout>
 

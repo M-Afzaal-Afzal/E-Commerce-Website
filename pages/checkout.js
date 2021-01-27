@@ -20,6 +20,7 @@ import Layout from "../src/components/Layout/Layout";
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
 import * as selectors from "../src/store/selectors/index.selectors";
+import StripeCheckoutButton from "../src/components/stripeCheckoutButton/checkoutButton.component";
 
 const containerVariants = {
     visible: {
@@ -75,90 +76,105 @@ const Checkout = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const hatsProducts = useSelector(selectors.selectHatsProducts);
-    const mensProducts = useSelector(selectors.selectMensProducts);
-    const womensProducts = useSelector(selectors.selectWomensProducts);
-    const sneakersProducts = useSelector(selectors.selectSneakersProducts);
-    const glassesProducts = useSelector(selectors.selectGlassesProducts);
-    const jacketsProducts = useSelector(selectors.selectJacketsProducts);
+    // const hatsProducts = useSelector(selectors.selectHatsProducts);
+    // const mensProducts = useSelector(selectors.selectMensProducts);
+    // const womensProducts = useSelector(selectors.selectWomensProducts);
+    // const sneakersProducts = useSelector(selectors.selectSneakersProducts);
+    // const glassesProducts = useSelector(selectors.selectGlassesProducts);
+    // const jacketsProducts = useSelector(selectors.selectJacketsProducts);
+    //
+    // const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
+    //
+    // const cartedProducts = allProducts.filter(product => product.isAddedToCart);
 
-    const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
+    const cartedProducts = useSelector(selectors.selectCartedProducts);
 
-    const cartedProducts = allProducts.filter(product => product.isAddedToCart);
+    const grandTotal = cartedProducts
+        .map(product => (product.price * product.quantity))
+        .reduce((prevValue, curValue) => (prevValue + curValue), 0);
 
-    const toggleCart = (id, type) => {
-        switch (type) {
-            case 'HATS':
-                dispatch(actions.toggleHatCart(id));
-                break;
-            case 'GLASSES':
-                dispatch(actions.toggleGlassCart(id));
-                break;
-            case 'SNEAKERS':
-                dispatch(actions.toggleSneakerCart(id));
-                break;
-            case 'JACKETS':
-                dispatch(actions.toggleJacketCart(id));
-                break;
-            case 'MENS':
-                dispatch(actions.toggleMenCart(id));
-                break;
-            case 'WOMENS':
-                dispatch(actions.toggleWomenCart(id));
-                break;
-            default:
-                throw new Error('Checkout file product type error');
-        }
+    const removeFromCartHandlerCard = (category,id) => {
+        dispatch(actions.removeFromCart(id));
+        dispatch(actions.isAddedToCartFalse(category,id));
     }
 
-    const handleAdd = (id, type) => {
-        switch (type) {
-            case 'HATS':
-                dispatch(actions.addOneHat(id));
-                break;
-            case 'GLASSES':
-                dispatch(actions.addOneGlass(id));
-                break;
-            case 'SNEAKERS':
-                dispatch(actions.addOneSneaker(id));
-                break;
-            case 'JACKETS':
-                dispatch(actions.addOneJacket(id));
-                break;
-            case 'MENS':
-                dispatch(actions.addOneMens(id));
-                break;
-            case 'WOMENS':
-                dispatch(actions.addOneWomen(id));
-                break;
-            default:
-                throw new Error('Checkout file product type error');
-        }
+    const removeFromCartHandler = (category,id) => {
+        dispatch(actions.removeFromCart(id));
+        dispatch(actions.isAddedToCartFalse(category,id));
+        // switch (type) {
+        //     case 'HATS':
+        //         dispatch(actions.toggleHatCart(id));
+        //         break;
+        //     case 'GLASSES':
+        //         dispatch(actions.toggleGlassCart(id));
+        //         break;
+        //     case 'SNEAKERS':
+        //         dispatch(actions.toggleSneakerCart(id));
+        //         break;
+        //     case 'JACKETS':
+        //         dispatch(actions.toggleJacketCart(id));
+        //         break;
+        //     case 'MENS':
+        //         dispatch(actions.toggleMenCart(id));
+        //         break;
+        //     case 'WOMENS':
+        //         dispatch(actions.toggleWomenCart(id));
+        //         break;
+        //     default:
+        //         throw new Error('Checkout file product type error');
+        // }
     }
 
-    const handleSub = (id, type) => {
-        switch (type) {
-            case 'HATS':
-                dispatch(actions.subOneHat(id));
-                break;
-            case 'GLASSES':
-                dispatch(actions.subOneGlass(id));
-                break;
-            case 'SNEAKERS':
-                dispatch(actions.subOneSneaker(id));
-                break;
-            case 'JACKETS':
-                dispatch(actions.subOneJacket(id));
-                break;
-            case 'MENS':
-                dispatch(actions.subOneMens(id));
-                break;
-            case 'WOMENS':
-                dispatch(actions.subOneWomen(id));
-                break;
-            default:
-                throw new Error('Checkout file product type error');
-        }
+    const handleAdd = (id) => {
+        dispatch(actions.addOneItemToCart(id))
+        // switch (type) {
+        //     case 'HATS':
+        //         dispatch(actions.addOneHat(id));
+        //         break;
+        //     case 'GLASSES':
+        //         dispatch(actions.addOneGlass(id));
+        //         break;
+        //     case 'SNEAKERS':
+        //         dispatch(actions.addOneSneaker(id));
+        //         break;
+        //     case 'JACKETS':
+        //         dispatch(actions.addOneJacket(id));
+        //         break;
+        //     case 'MENS':
+        //         dispatch(actions.addOneMens(id));
+        //         break;
+        //     case 'WOMENS':
+        //         dispatch(actions.addOneWomen(id));
+        //         break;
+        //     default:
+        //         throw new Error('Checkout file product type error');
+        // }
+    }
+
+    const handleSub = (id) => {
+        dispatch(actions.removeOneItemFromCart(id));
+        // switch (type) {
+        //     case 'HATS':
+        //         dispatch(actions.subOneHat(id));
+        //         break;
+        //     case 'GLASSES':
+        //         dispatch(actions.subOneGlass(id));
+        //         break;
+        //     case 'SNEAKERS':
+        //         dispatch(actions.subOneSneaker(id));
+        //         break;
+        //     case 'JACKETS':
+        //         dispatch(actions.subOneJacket(id));
+        //         break;
+        //     case 'MENS':
+        //         dispatch(actions.subOneMens(id));
+        //         break;
+        //     case 'WOMENS':
+        //         dispatch(actions.subOneWomen(id));
+        //         break;
+        //     default:
+        //         throw new Error('Checkout file product type error');
+        // }
     }
 
     // console.log(cartedProducts);
@@ -172,7 +188,7 @@ const Checkout = () => {
                         <Box mt={-5}>
                             <ProductsList cartedProducts products={cartedProducts} subHandler={handleSub}
                                           addHandler={handleAdd}
-                                          toggleCartHandler={toggleCart}/>
+                                          removeFromCartHandler={removeFromCartHandlerCard}/>
                         </Box>
                     </Hidden>
 
@@ -279,7 +295,7 @@ const Checkout = () => {
                                                                     <Box>
                                                                         <IconButton
                                                                             name={'remove_from_cart'}
-                                                                            onClick={() => toggleCart(product.id, product.category)}>
+                                                                            onClick={() => removeFromCartHandler(product.category, product.id)}>
                                                                             <CloseOutlinedIcon color={'primary'}
                                                                                                fontSize={'small'}/>
                                                                         </IconButton>
@@ -308,19 +324,18 @@ const Checkout = () => {
                                 <Grid item component={motion.div} layout>
                                     <Box>
                                         <Typography color={'secondary'} variant={matchesSm ? 'h6' : 'h5'}>
-                                            $ {cartedProducts
-                                            .map(product => (product.price * product.quantity))
-                                            .reduce((prevValue, curValue) => (prevValue + curValue), 0)}
+                                            $ {grandTotal}
                                         </Typography>
                                     </Box>
                                 </Grid>
                             </Grid>
                             <Grid component={motion.div} layout item container justify={'center'}>
                                 <Box mt={5} mb={10}>
-                                    <Button name={'pay now'} size={"large"} variant={'contained'}
-                                            color={'secondary'}>
-                                        PAY NOW
-                                    </Button>
+                                    {/*<Button name={'pay now'} size={"large"} variant={'contained'}*/}
+                                    {/*        color={'secondary'}>*/}
+                                    {/*    PAY NOW*/}
+                                    {/*</Button>*/}
+                                    <StripeCheckoutButton price={grandTotal}/>
                                 </Box>
 
                             </Grid>
