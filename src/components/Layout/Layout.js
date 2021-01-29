@@ -62,6 +62,8 @@ const Layout = ({children}) => {
 
     // console.log(user)
 
+    console.log('Layout')
+
     return (
         <Fragment>
             <Header/>

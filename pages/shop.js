@@ -24,80 +24,6 @@ const Shop = () => {
 
     const jacketProducts = useSelector(selectors.selectShopJackets).slice(0,4);
 
-    // console.log(menProducts);
-    //
-    // const toggleSneakersCartHandler = (id) => {
-    //     dispatch(actions.toggleSneakerCart(id))
-    // }
-    //
-    // const toggleHatsCartHandler = (id) => {
-    //     dispatch(actions.toggleHatCart(id))
-    // }
-    //
-    // const toggleMensCartHandler = (id) => {
-    //     dispatch(actions.toggleMenCart(id))
-    // }
-    //
-    // const toggleWomensCartHandler = (id) => {
-    //     dispatch(actions.toggleWomenCart(id))
-    // }
-    //
-    // const toggleJacketsCartHandler = (id) => {
-    //     dispatch(actions.toggleJacketCart(id))
-    // }
-    //
-    // const toggleGlassesCartHandler = (id) => {
-    //     dispatch(actions.toggleGlassCart(id))
-    // }
-    //
-    // const addSneakersHandler = (id) => {
-    //     dispatch(actions.addOneSneaker(id))
-    // }
-    //
-    // const addHatsHandler = (id) => {
-    //     dispatch(actions.addOneHat(id))
-    // }
-    //
-    // const addMensHandler = (id) => {
-    //     dispatch(actions.addOneMens(id))
-    // }
-    //
-    // const addWomensHandler = (id) => {
-    //     dispatch(actions.addOneWomen(id))
-    // }
-    //
-    // const addJacketsHandler = (id) => {
-    //     dispatch(actions.addOneJacket(id))
-    // }
-    //
-    // const addGlassesHandler = (id) => {
-    //     dispatch(actions.addOneGlass(id))
-    // }
-    //
-    //
-    // const subHatsHandler = (id) => {
-    //     dispatch(actions.subOneHat(id));
-    // }
-    //
-    // const subSneakersHandler = (id) => {
-    //     dispatch(actions.subOneSneaker(id));
-    // }
-    //
-    // const subMensHandler = (id) => {
-    //     dispatch(actions.subOneMens(id));
-    // }
-    //
-    // const subWomensHandler = (id) => {
-    //     dispatch(actions.subOneWomen(id));
-    // }
-    //
-    // const subJacketsHandler = (id) => {
-    //     dispatch(actions.subOneJacket(id));
-    // }
-    //
-    // const subGlassesHandler = (id) => {
-    //     dispatch(actions.subOneGlass(id));
-    // }
 
     const addToCartHandler = (product,id) => {
         dispatch(actions.addToCart(product,id));
@@ -116,7 +42,7 @@ const Shop = () => {
     const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
-        <Layout>
+        <React.Fragment>
             <Box mt={matchesXs ? 12 : 18} pl={matchesXs ? 4 : 8} mb={-18}>
                 <Typography variant={matchesSm ? 'h4' : 'h3'} color={'primary'}>SNEAKERS</Typography>
             </Box>
@@ -151,7 +77,7 @@ const Shop = () => {
             </Box>
             <ProductsList products={glassProducts} subHandler={subItemHandler} addHandler={addItemHandler}
                           addToCartHandler={addToCartHandler}/>
-        </Layout>
+        </React.Fragment>
 
     )
 };

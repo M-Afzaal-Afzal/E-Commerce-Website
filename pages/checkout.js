@@ -16,7 +16,6 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import {useDispatch, useSelector} from "react-redux";
 import * as actions from '../src/store/actions/index.actions';
-import Layout from "../src/components/Layout/Layout";
 import ProductsList from "../src/components/ProductsList/ProductsList";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
 import * as selectors from "../src/store/selectors/index.selectors";
@@ -76,17 +75,6 @@ const Checkout = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    // const hatsProducts = useSelector(selectors.selectHatsProducts);
-    // const mensProducts = useSelector(selectors.selectMensProducts);
-    // const womensProducts = useSelector(selectors.selectWomensProducts);
-    // const sneakersProducts = useSelector(selectors.selectSneakersProducts);
-    // const glassesProducts = useSelector(selectors.selectGlassesProducts);
-    // const jacketsProducts = useSelector(selectors.selectJacketsProducts);
-    //
-    // const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
-    //
-    // const cartedProducts = allProducts.filter(product => product.isAddedToCart);
-
     const cartedProducts = useSelector(selectors.selectCartedProducts);
 
     const grandTotal = cartedProducts
@@ -101,86 +89,20 @@ const Checkout = () => {
     const removeFromCartHandler = (category,id) => {
         dispatch(actions.removeFromCart(id));
         dispatch(actions.isAddedToCartFalse(category,id));
-        // switch (type) {
-        //     case 'HATS':
-        //         dispatch(actions.toggleHatCart(id));
-        //         break;
-        //     case 'GLASSES':
-        //         dispatch(actions.toggleGlassCart(id));
-        //         break;
-        //     case 'SNEAKERS':
-        //         dispatch(actions.toggleSneakerCart(id));
-        //         break;
-        //     case 'JACKETS':
-        //         dispatch(actions.toggleJacketCart(id));
-        //         break;
-        //     case 'MENS':
-        //         dispatch(actions.toggleMenCart(id));
-        //         break;
-        //     case 'WOMENS':
-        //         dispatch(actions.toggleWomenCart(id));
-        //         break;
-        //     default:
-        //         throw new Error('Checkout file product type error');
-        // }
     }
 
     const handleAdd = (id) => {
         dispatch(actions.addOneItemToCart(id))
-        // switch (type) {
-        //     case 'HATS':
-        //         dispatch(actions.addOneHat(id));
-        //         break;
-        //     case 'GLASSES':
-        //         dispatch(actions.addOneGlass(id));
-        //         break;
-        //     case 'SNEAKERS':
-        //         dispatch(actions.addOneSneaker(id));
-        //         break;
-        //     case 'JACKETS':
-        //         dispatch(actions.addOneJacket(id));
-        //         break;
-        //     case 'MENS':
-        //         dispatch(actions.addOneMens(id));
-        //         break;
-        //     case 'WOMENS':
-        //         dispatch(actions.addOneWomen(id));
-        //         break;
-        //     default:
-        //         throw new Error('Checkout file product type error');
-        // }
     }
 
     const handleSub = (id) => {
         dispatch(actions.removeOneItemFromCart(id));
-        // switch (type) {
-        //     case 'HATS':
-        //         dispatch(actions.subOneHat(id));
-        //         break;
-        //     case 'GLASSES':
-        //         dispatch(actions.subOneGlass(id));
-        //         break;
-        //     case 'SNEAKERS':
-        //         dispatch(actions.subOneSneaker(id));
-        //         break;
-        //     case 'JACKETS':
-        //         dispatch(actions.subOneJacket(id));
-        //         break;
-        //     case 'MENS':
-        //         dispatch(actions.subOneMens(id));
-        //         break;
-        //     case 'WOMENS':
-        //         dispatch(actions.subOneWomen(id));
-        //         break;
-        //     default:
-        //         throw new Error('Checkout file product type error');
-        // }
     }
 
     // console.log(cartedProducts);
 
     return (
-        <Layout>
+        <React.Fragment>
             <Container maxWidth={'md'} disableGutters={matchesXs}>
                 <Box mt={18} mb={2}>
 
@@ -347,7 +269,7 @@ const Checkout = () => {
                 </Box>
             </Container>
 
-        </Layout>
+        </React.Fragment>
 
     );
 }

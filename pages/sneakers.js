@@ -1,7 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../src/store/actions/index.actions';
 import ProductsList from "../src/components/ProductsList/ProductsList";
-import Layout from "../src/components/Layout/Layout";
 import React from "react";
 import * as selectors from '../src/store/selectors/index.selectors'
 
@@ -26,10 +25,10 @@ const Sneakers = () => {
     }
 
     return (
-        <Layout>
+        <React.Fragment>
             <ProductsList products={products} subHandler={subHandler} addHandler={addHandler}
                           addToCartHandler={addToCartHandler}/>
-        </Layout>
+        </React.Fragment>
 
     )
 };

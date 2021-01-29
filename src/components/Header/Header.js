@@ -21,7 +21,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import {auth} from '../../firebaseUtils/firebaseUtils'
-import {createSelector} from "reselect";
 
 import * as selectors from '../../store/selectors/index.selectors'
 
@@ -75,26 +74,13 @@ const Header = () => {
 
     const isLoggedIn = Boolean(useSelector(state => state.user.currentUser));
 
-    console.log(isLoggedIn)
-
-    // const hatsProducts = useSelector(selectors.selectHatsProducts);
-    // const mensProducts = useSelector(selectors.selectMensProducts);
-    // const womensProducts = useSelector(selectors.selectWomensProducts);
-    // const sneakersProducts = useSelector(selectors.selectSneakersProducts);
-    // const glassesProducts = useSelector(selectors.selectGlassesProducts);
-    // const jacketsProducts = useSelector(selectors.selectJacketsProducts);
-    //
-    // const allProducts = [...hatsProducts, ...mensProducts, ...womensProducts, ...sneakersProducts, ...glassesProducts, ...jacketsProducts];
-    //
-    // const cartedProducts = allProducts.filter(product => product.isAddedToCart);
-
     const cartedProducts = useSelector(selectors.selectCartedProducts);
 
     const quantityArr = cartedProducts.map((product) => product.quantity);
 
     const quantity = quantityArr.reduce((preVal,curVal) => preVal + curVal,0);
-    console.log(quantityArr)
-    console.log(quantity);
+    // console.log(quantityArr)
+    // console.log(quantity);
     // console.log(cartedProducts);
 
 
@@ -256,7 +242,7 @@ const Header = () => {
                                     <Box py={2} px={2}>
                                         <Button name={'checkout'} className={classes.link} color={'secondary'}
                                                 variant={'contained'}
-                                                component={Link} href={'/checkout'} fullWidth>CHECKOUT</Button>
+                                                component={Link} href={'/checkout'} onClick={handleClose} fullWidth>CHECKOUT</Button>
                                     </Box>
                                 }
                             </Paper>
@@ -281,15 +267,15 @@ const Header = () => {
                                     </ListItemText>
                                 </ListItem>
                                 <ListItem name={'home'} component={Link} href={'/'} color={'primary'} button>
-                                    <ListItemText primary={'HOME'}/>
+                                    <ListItemText onClick={handleDrawer} primary={'HOME'}/>
                                 </ListItem>
                                 <Divider/>
                                 <ListItem name={'shop'} component={Link} href={'/shop'} button>
-                                    <ListItemText primary={'SHOP'}/>
+                                    <ListItemText onClick={handleDrawer} primary={'SHOP'}/>
                                 </ListItem>
                                 <Divider/>
                                 <ListItem name={'checkout'} component={Link} href={'/checkout'} button>
-                                    <ListItemText primary={'CHECKOUT'}/>
+                                    <ListItemText onClick={handleDrawer} primary={'CHECKOUT'}/>
                                 </ListItem>
                                 <Divider/>
 
@@ -297,11 +283,11 @@ const Header = () => {
                                     isLoggedIn ?
                                         (<ListItem name={'signout'} component={Link} href={''}
                                                    onClick={() => auth.signOut()} button>
-                                            <ListItemText primary={'SIGN OUT'}/>
+                                            <ListItemText onClick={handleDrawer} primary={'SIGN OUT'}/>
                                         </ListItem>)
                                         :
                                         (<ListItem name={'signin'} component={Link} href={'/signin'} button>
-                                            <ListItemText primary={'SIGNIN'}/>
+                                            <ListItemText onClick={handleDrawer} primary={'SIGNIN'}/>
                                         </ListItem>)
                                 }
 

@@ -8,7 +8,7 @@ import {Provider} from 'react-redux'
 import {useStore} from '../src/store/store'
 import {persistStore} from "redux-persist";
 import {PersistGate} from 'redux-persist/integration/react'
-
+import Layout from "../src/components/Layout/Layout";
 
 export default function MyApp(props) {
     const store = useStore(props.pageProps.initialReduxState)
@@ -43,7 +43,9 @@ export default function MyApp(props) {
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
-                        <Component {...pageProps} />
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
                     </PersistGate>
                 </Provider>
             </ThemeProvider>

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "../src/components/Layout/Layout";
 import {
     Box,
     Button,
@@ -102,7 +101,7 @@ const SignIn = () => {
 
     return (
         <div className={classes.mainContainer}>
-            <Layout>
+            <React.Fragment>
                 <Box pt={matchesXs ? 13 : 18} pb={15}>
 
                     <Container maxWidth={'lg'}>
@@ -193,7 +192,7 @@ const SignIn = () => {
                         </form>
                     </Container>
                 </Box>
-            </Layout>
+            </React.Fragment>
         </div>
     );
 };

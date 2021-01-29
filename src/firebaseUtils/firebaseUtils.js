@@ -20,6 +20,20 @@ if (!firebase.apps.length) {
     firebase.app(); // if already initialized, use that one
 }
 
+export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
+
+    const collectionRef = firestore.collection(collectionKey);
+    const batch = firestore.batch();
+
+    objectsToAdd.forEach((obj) => {
+        const newDocRef = collectionRef.doc();
+        console.log(collectionRef);
+        batch.set(newDocRef, obj);
+    })
+
+    return await batch.commit();
+}
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
@@ -27,7 +41,9 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
     const userRef = firestore.doc(`/users/${userAuth.uid}`);
     const snapShot = await userRef.get();
-    console.log(snapShot);
+
+    // console.log('snapshot',snapShot);
+    // console.log('DataSnapshot', snapShot.data())
 
     if (!snapShot.exists) {
         const {displayName, email} = userAuth;

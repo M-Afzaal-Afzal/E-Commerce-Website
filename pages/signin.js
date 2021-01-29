@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "../src/components/Layout/Layout";
 import {
     Box,
     Button, CircularProgress,
@@ -90,25 +89,13 @@ const SignIn = () => {
        }
     },[user])
 
-    // const [email,setEmail] = useState('');
-    // const [password,setPassword]=useState('');
-
-    // const emailHandler = (e) => {
-    //     setEmail(e.target.value);
-    // }
-    //
-    // const passwordHandler = (e) => {
-    //     setPassword(e.target.value);
-    // }
-    // console.log(errors);
-
     const theme = useTheme();
 
     const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
         <div className={classes.mainContainer}>
-            <Layout>
+            <React.Fragment>
                 <Grid container justify={'center'}>
 
 
@@ -196,7 +183,7 @@ const SignIn = () => {
                         </Container>
                     </Box>
                 </Grid>
-            </Layout>
+            </React.Fragment>
         </div>
     );
 };

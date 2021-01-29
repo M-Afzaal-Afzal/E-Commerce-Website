@@ -5,7 +5,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '../src/utils/Link';
-import Layout from "../src/components/Layout/Layout";
 import {motion} from "framer-motion";
 import React from "react";
 
@@ -82,7 +81,7 @@ const Index = () => {
     ]
 
     return (
-        <Layout>
+        <React.Fragment>
             <Box mt={matchesXs ? 12 : 18}>
                 <Grid container direction={'column'} component={motion.div}
                       animate={'visible'}
@@ -97,7 +96,7 @@ const Index = () => {
                                         <Grid item container justify={'center'} sm={6} md={4} key={product.name}>
                                             <Card elevation={0} className={classes.cardContainer}>
                                                 <CardActionArea disabled disableRipple>
-                                                    <Image src={product.img} width={350} height={350}
+                                                    <Image priority src={product.img} width={350} height={350}
                                                            alt={product.name}/>
                                                     <CardContent>
                                                         <Grid container justify={'center'}>
@@ -129,7 +128,7 @@ const Index = () => {
 
                 </Grid>
             </Box>
-        </Layout>
+        </React.Fragment>
 
     );
 }
