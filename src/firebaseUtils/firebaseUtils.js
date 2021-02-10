@@ -27,11 +27,28 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
 
     objectsToAdd.forEach((obj) => {
         const newDocRef = collectionRef.doc();
-        console.log(collectionRef);
         batch.set(newDocRef, obj);
     })
 
     return await batch.commit();
+}
+
+export const convertCollectionSnapshotToMap = (collections) => {
+
+    const transformedCollection = collections.docs.map((doc) => {
+        const {title,items} = doc.data();
+        return {
+            name: title.toLowerCase(),
+            items: items,
+            id: doc.id,
+        }
+    })
+
+    return transformedCollection.reduce((accumulator,collection) => {
+        accumulator[collection.name.toLowerCase()] = collection;
+        return accumulator;
+    },{})
+
 }
 
 export const auth = firebase.auth();

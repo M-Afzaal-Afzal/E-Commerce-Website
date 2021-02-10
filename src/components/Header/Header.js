@@ -67,7 +67,7 @@ const useStyles = makeStyles(() => ({
     listContainer: {
         minWidth: '100%',
         maxWidth: 360,
-    }
+    },
 }))
 
 const Header = () => {
@@ -78,11 +78,7 @@ const Header = () => {
 
     const quantityArr = cartedProducts.map((product) => product.quantity);
 
-    const quantity = quantityArr.reduce((preVal,curVal) => preVal + curVal,0);
-    // console.log(quantityArr)
-    // console.log(quantity);
-    // console.log(cartedProducts);
-
+    const quantity = quantityArr.reduce((preVal, curVal) => preVal + curVal, 0);
 
     const classes = useStyles();
 
@@ -242,7 +238,8 @@ const Header = () => {
                                     <Box py={2} px={2}>
                                         <Button name={'checkout'} className={classes.link} color={'secondary'}
                                                 variant={'contained'}
-                                                component={Link} href={'/checkout'} onClick={handleClose} fullWidth>CHECKOUT</Button>
+                                                component={Link} href={'/checkout'} onClick={handleClose}
+                                                fullWidth>CHECKOUT</Button>
                                     </Box>
                                 }
                             </Paper>
@@ -267,7 +264,9 @@ const Header = () => {
                                     </ListItemText>
                                 </ListItem>
                                 <ListItem name={'home'} component={Link} href={'/'} color={'primary'} button>
-                                    <ListItemText onClick={handleDrawer} primary={'HOME'}/>
+                                    <div>
+                                        <ListItemText onClick={handleDrawer} primary={'HOME'}/>
+                                    </div>
                                 </ListItem>
                                 <Divider/>
                                 <ListItem name={'shop'} component={Link} href={'/shop'} button>

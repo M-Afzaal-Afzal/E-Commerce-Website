@@ -1,43 +1,47 @@
 import * as actionTypes from '../actionTypes/actionTypes';
-import {cloneDeep} from 'lodash'
+import produce from "immer";
 
-import {SHOP_DATA} from './shop.data'
+// import {SHOP_DATA} from './shop.data'
 
-const INITIAL_STATE = SHOP_DATA;
+const INITIAL_STATE = {
+    collections: null,
+    isFetching: true,
+    errorMessage: null,
+};
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = produce((draft, action) => {
     switch (action.type) {
+        case actionTypes.FETCH_COLLECTION_START: {
+            draft.isFetching = true;
+            break;
+        }
+        case actionTypes.FETCH_COLLECTION_SUCCESS: {
+            draft.collections = action.collections;
+            draft.isFetching = false;
+            break;
+        }
+
+        case actionTypes.FETCH_COLLECTION_FAILURE: {
+            return produce(state, draft => {
+                draft.isFetching = false;
+                draft.errorMessage = action.errorMessage;
+            })
+
+        }
         case actionTypes.ADD_ONE_ITEM: {
-            const collections = cloneDeep(state);
-            // const collection = collections[action.category];
-            // const collectionItems = collections.items;
-            // const collectionItem = collectionItems.find(item => item.id === action.id);
-            // const collectionItemQuantity = collectionItem.quantity;
-            collections[action.category].items.find(item => item.id === action.id).quantity += 1;
-            return collections;
+            draft.collections[action.category].items.find(item => item.id === action.id).quantity += 1;
+            break;
         }
+
         case actionTypes.REMOVE_ONE_ITEM: {
-            const collections = cloneDeep(state);
-            const quantity = collections[action.category].items.find(item => item.id === action.id).quantity;
-            collections[action.category].items.find(item => item.id === action.id).quantity = Math.max(quantity - 1, 1);
-            return collections;
-        }
-
-        case actionTypes.IS_ADDED_TO_CART_FALSE: {
-            const collections = cloneDeep(state);
-            collections[action.category].items.find(item => item.id === action.id).isAddedToCart = false;
-            return collections;
-        }
-
-        case actionTypes.IS_ADDED_TO_CART_TRUE: {
-            const collections = cloneDeep(state);
-            collections[action.category].items.find(item => item.id === action.id).isAddedToCart = true;
-            return collections;
+            const quantity = draft.collections[action.category].items.find(item => item.id === action.id).quantity;
+            draft.collections[action.category].items.find(item => item.id === action.id).quantity = Math.max(quantity - 1, 1);
+            break;
         }
 
         default:
-            return state;
+            break;
     }
-}
+}, INITIAL_STATE);
 
 export default reducer;

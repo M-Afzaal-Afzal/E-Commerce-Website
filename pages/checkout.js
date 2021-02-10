@@ -83,12 +83,10 @@ const Checkout = () => {
 
     const removeFromCartHandlerCard = (category,id) => {
         dispatch(actions.removeFromCart(id));
-        dispatch(actions.isAddedToCartFalse(category,id));
     }
 
     const removeFromCartHandler = (category,id) => {
         dispatch(actions.removeFromCart(id));
-        dispatch(actions.isAddedToCartFalse(category,id));
     }
 
     const handleAdd = (id) => {

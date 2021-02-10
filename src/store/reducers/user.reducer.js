@@ -1,18 +1,18 @@
 import * as actionTypes from '../actionTypes/actionTypes'
+import produce from "immer";
 
 const INITIAL_STATE = {
-    currentUser : null,
+    currentUser: null,
 }
 
-const reducer = (state = INITIAL_STATE,action) => {
+const reducer = produce((draft, action) => {
     switch (action.type) {
         case actionTypes.SET_CURRENT_USER:
-            return {
-                currentUser: action.user,
-            }
+            draft.currentUser = action.user;
+            break;
         default:
-            return state;
+            break;
     }
-}
+}, INITIAL_STATE)
 
 export default reducer;

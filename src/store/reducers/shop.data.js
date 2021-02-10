@@ -4,6 +4,7 @@ export const SHOP_DATA = {
         'name': 'GLASSES',
         'image': '/glasses.jpg',
         routeName: 'shop/glasses',
+        title: 'Glasses',
         items: [
             {
                 'name': 'LYA',
@@ -56,6 +57,7 @@ export const SHOP_DATA = {
         'name': 'HATS',
         'image': '/hats.jpg',
         routeName: 'shop/hats',
+        title: 'Hats',
         items: [
             {
                 'name': 'Brown Brim',
@@ -148,6 +150,7 @@ export const SHOP_DATA = {
         routeName: 'shop/mens',
         'name': 'MENS',
         'image': '/mens.jpg',
+        title: 'Mens',
         items: [
             {
                 'name': 'Camo Down Vest',
@@ -197,6 +200,7 @@ export const SHOP_DATA = {
         routeName: 'shop/womens',
         'name': 'WOMENS',
         'image': '/womens.jpg',
+        title: "Womens",
         items: [
             {
                 'name': 'Blue Tanktop',
@@ -244,6 +248,7 @@ export const SHOP_DATA = {
     },
     jackets: {
         id: 5,
+        title: 'Jackets',
         routeName: 'shop/jackets',
         'name': 'JACKETS',
         'image': '/jackets.jpg',
@@ -295,6 +300,7 @@ export const SHOP_DATA = {
     },
     sneakers: {
         id: 6,
+        title: 'Sneakers',
         routeName: 'shop/sneakers',
         'name': 'SNEAKERS',
         'image': '/sneakers.jpg',

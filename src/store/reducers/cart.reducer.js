@@ -1,49 +1,50 @@
 import * as actionTypes from '../actionTypes/actionTypes'
 import {cloneDeep} from 'lodash';
+import produce from "immer";
 
 const INITIAL_STATE = {
     cartedProducts: [],
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = produce((draft,action) => {
     switch (action.type) {
         case actionTypes.ADD_TO_CART: {
-            const newState = cloneDeep(state);
-            const alreadyAddedProduct = newState.cartedProducts.find(product => product.id === action.id);
+
+            const alreadyAddedProduct = draft.cartedProducts.find(product => product.id === action.id);
             if (alreadyAddedProduct) {
-                const quantity = newState.cartedProducts.find(product => product.id === action.id).quantity;
-                newState.cartedProducts.find(product => product.id === action.id).quantity = quantity + action.product.quantity;
+                const quantity = draft.cartedProducts.find(product => product.id === action.id).quantity;
+                draft.cartedProducts.find(product => product.id === action.id).quantity = quantity + action.product.quantity;
             } else {
                 const newProduct = cloneDeep(action.product);
                 newProduct.isAddedToCart = true;
-                newState.cartedProducts.push(newProduct)
+                draft.cartedProducts.push(newProduct)
             }
-            return newState;
+            break;
         }
 
         case actionTypes.REMOVE_FROM_CART: {
-            const newState = cloneDeep(state);
-            const indexOfItem = newState.cartedProducts.findIndex(item => item.id === action.id);
-            newState.cartedProducts.splice(indexOfItem, 1);
-            return newState;
+
+            const indexOfItem = draft.cartedProducts.findIndex(item => item.id === action.id);
+            draft.cartedProducts.splice(indexOfItem, 1);
+            break;
         }
 
         case actionTypes.ADD_ONE_ITEM_TO_CARTED_PRODUCTS: {
-            const newState = cloneDeep(state);
-            newState.cartedProducts.find(product => product.id === action.id).quantity+=  1;
-            return newState ;
+
+            draft.cartedProducts.find(product => product.id === action.id).quantity+=  1;
+            break;
         }
 
         case actionTypes.REMOVE_ONE_ITEM_FROM_CARTED_PRODUCTS: {
-            const newState = cloneDeep(state);
-            const quantity = newState.cartedProducts.find(product => product.id === action.id).quantity;
-            newState.cartedProducts.find(product => product.id === action.id).quantity = Math.max(quantity - 1,1);
-            return newState;
+
+            const quantity = draft.cartedProducts.find(product => product.id === action.id).quantity;
+            draft.cartedProducts.find(product => product.id === action.id).quantity = Math.max(quantity - 1,1);
+           break;
         }
 
         default:
-            return state;
+            break;
     }
+},INITIAL_STATE)
 
-}
 export default reducer;

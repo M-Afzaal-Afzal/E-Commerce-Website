@@ -1,9 +1,8 @@
 import React, {Fragment} from 'react';
 import {
-    Badge,
     Box,
     Button,
-    ButtonGroup,
+    ButtonGroup, CircularProgress,
     Container,
     Grid,
     makeStyles,
@@ -47,13 +46,15 @@ const ProductsList = (props) => {
 
     return (
 
+        props.products ?
+
         <Fragment>
             <Box mt={18}>
                 <Container style={{paddingLeft: '8px', paddingRight: '8px'}}>
                     <AnimateSharedLayout>
                         <Grid component={motion.div} layout container spacing={2} justify={'center'} align={'center'}>
                             <AnimatePresence>
-                                {props.products.map((product) => {
+                                {(props.products ? props.products : new Array(4)).map((product) => {
                                     return (
                                         <Grid item container md={4} sm={6} lg={3}
                                               justify={'center'}
@@ -69,11 +70,9 @@ const ProductsList = (props) => {
 
                                             <Card elevation={0} className={classes.cardContainer}>
                                                 <CardActionArea disabled disableRipple>
-                                                    <Badge overlap={'circle'} badgeContent={'C'} invisible={!product.isAddedToCart} color="primary">
-
                                                         <Image src={product.image} width={350} height={400}
                                                                alt={product.name}/>
-                                                    </Badge>
+
                                                     <CardContent>
                                                         <Grid container justify={'space-between'}>
                                                             <Typography color={'primary'}
@@ -141,6 +140,18 @@ const ProductsList = (props) => {
                 </Container>
             </Box>
         </Fragment>
+:
+            <div style={{
+                width: '100vw',
+                height: '100vh',
+                margin: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <CircularProgress color={'secondary'} size={80} thickness={4}/>
+            </div>
+
 
     )
 };

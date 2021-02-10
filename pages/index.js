@@ -52,31 +52,31 @@ const Index = () => {
         {
             name: 'MENS',
             img: '/mens.jpg',
-            productsUrl: '/mens',
+            productsUrl: '/shop/mens',
         },
         {
             name: 'WOMENS',
             img: '/womens.jpg',
-            productsUrl: '/womens',
+            productsUrl: '/shop/womens',
         },
         {
             name: 'HATS',
             img: '/hats.jpg',
-            productsUrl: '/hats',
+            productsUrl: '/shop/hats',
         },
         {
             name: 'SNEAKERS',
             img: '/sneakers.jpg',
-            productsUrl: '/sneakers',
+            productsUrl: '/shop/sneakers',
         },
         {
             name: 'JACKETS',
             img: '/jackets.jpg',
-            productsUrl: '/jackets',
+            productsUrl: '/shop/jackets',
         }, {
             name: 'GLASSES',
             img: '/glasses.jpg',
-            productsUrl: '/glasses',
+            productsUrl: '/shop/glasses',
         },
     ]
 

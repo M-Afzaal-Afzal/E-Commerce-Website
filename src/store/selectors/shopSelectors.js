@@ -1,33 +1,38 @@
 import {createSelector} from "reselect";
 
-export const selectShop = state => state.shop;
+export const selectCollections = state => state.shop.collections;
+
+export const selectIsFetching = state => state.shop.isFetching;
+
+export const selectErrorMessage = state => state.shop.errorMessage;
+
 
 export const selectShopJackets = createSelector(
-    [selectShop],
-    (shop) => shop.jackets.items
+    [selectCollections],
+    (collections) => collections ? collections.jackets?.items : []
 )
 
 export const selectShopSneakers = createSelector(
-    [selectShop],
-    (shop) => shop.sneakers.items
+    [selectCollections],
+    (collections) => collections ? collections.sneakers?.items : []
 );
 
 export const selectShopMens = createSelector(
-    [selectShop],
-    (shop) => shop.mens.items
+    [selectCollections],
+    (collections) => collections ? collections.mens?.items : []
 );
 
 export const selectShopWomens = createSelector(
-    [selectShop],
-    (shop) => shop.womens.items
+    [selectCollections],
+    (collections) => collections ? collections.womens?.items : []
 );
 
 export const selectShopHats = createSelector(
-    [selectShop],
-    (shop) => shop.hats.items
+    [selectCollections],
+    (collections) => collections ? collections.hats?.items : []
 );
 
 export const selectShopGlasses = createSelector(
-    [selectShop],
-    (shop) => shop.glasses.items
+    [selectCollections],
+    (collections) => collections ? collections.glasses?.items : []
 );

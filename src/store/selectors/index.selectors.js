@@ -10,7 +10,10 @@ export {
     selectShopJackets,
     selectShopMens,
     selectShopSneakers,
-    selectShopWomens
+    selectShopWomens,
+    selectCollections,
+    selectIsFetching,
+    selectErrorMessage
 } from './shopSelectors'
 
 export {selectCartedProducts} from './cartSelector'
