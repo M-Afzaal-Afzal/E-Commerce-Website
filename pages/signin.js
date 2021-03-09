@@ -12,11 +12,11 @@ import {
     useTheme
 } from "@material-ui/core";
 import Link from '../src/utils/Link'
-import {signInWithGoogle} from "../src/firebaseUtils/firebaseUtils";
 import {useForm} from 'react-hook-form';
-import {auth} from '../src/firebaseUtils/firebaseUtils';
 import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import * as actions from '../src/store/actions/index.actions';
+import {selectIsLoading} from "../src/store/selectors/userSelectors";
 
 const useStyles = makeStyles(() => ({
     cardContainer: {
@@ -38,25 +38,27 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = () => {
 
+    const dispatch = useDispatch();
     const router = useRouter();
     const user = useSelector(state => state.user.currentUser);
 
     const {register, handleSubmit, errors, control, reset} = useForm();
 
-    const [isLoading, setIsLoading] = useState(false);
+    const isLoading =useSelector(selectIsLoading) ;
 
-    const onSubmit = handleSubmit(async data => {
+    const onSubmit = handleSubmit( data => {
+         dispatch(actions.emailSignInStart(data.email, data.password));
 
-        try {
-            setIsLoading(true);
-            await auth.signInWithEmailAndPassword(data.email, data.password);
-            setIsLoading(false);
-            reset();
-            router.replace('/');
-        } catch (err) {
-            setIsLoading(false);
-            console.log(err.message)
-        }
+        // try {
+        //     setIsLoading(true);
+        //     await auth.signInWithEmailAndPassword(data.email, data.password);
+        //     setIsLoading(false);
+        //     reset();
+        //     router.replace('/');
+        // } catch (err) {
+        //     setIsLoading(false);
+        //     console.log(err.message)
+        // }
 
         // console.log(data);
         // console.log(data.email);
@@ -64,6 +66,9 @@ const SignIn = () => {
 
     })
 
+    const signInWithGoogle = () => {
+        dispatch(actions.googleSignInStart());
+    }
 
     const emailReg = register({
         required: "You must specify an email",
@@ -81,17 +86,18 @@ const SignIn = () => {
         }
     })
 
-    const classes = useStyles();
 
     useEffect(() => {
-       if (user) {
-           router.replace('/');
-       }
-    },[user])
+        if (user) {
+            router.replace('/');
+        }
+    }, [user])
 
+    const classes = useStyles();
     const theme = useTheme();
 
     const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
+
 
     return (
         <div className={classes.mainContainer}>
@@ -152,6 +158,7 @@ const SignIn = () => {
                                                     fullWidth
                                                     size={'large'}
                                                     color={'primary'} variant={'contained'}
+                                                    disabled={isLoading}
                                                 >
                                                     Sign In
                                                 </Button>
@@ -161,6 +168,7 @@ const SignIn = () => {
                                         <Grid item container justify={'center'}>
                                             <Box mt={5}>
                                                 <Button
+                                                    type={'button'}
                                                     name={'sign in with google'}
                                                     onClick={signInWithGoogle} color={'primary'}>Sign In with
                                                     Google</Button>

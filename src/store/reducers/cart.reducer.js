@@ -42,6 +42,10 @@ const reducer = produce((draft,action) => {
            break;
         }
 
+        case actionTypes.CLEAR_CART:
+            draft.cartedProducts = [];
+            break;
+
         default:
             break;
     }

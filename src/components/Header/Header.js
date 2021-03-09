@@ -14,15 +14,16 @@ import {
 import Image from "next/image";
 import Link from '../../utils/Link';
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import DehazeOutlinedIcon from '@material-ui/icons/DehazeOutlined';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import {auth} from '../../firebaseUtils/firebaseUtils'
+import * as actions from '../../store/actions/index.actions'
 
 import * as selectors from '../../store/selectors/index.selectors'
+// import {selectCurrentUser} from "../../store/selectors/userSelectors";
 
 // const selectHats = state => state.hats;
 // const selectMens = state => state.mens;
@@ -72,7 +73,7 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
 
-    const isLoggedIn = Boolean(useSelector(state => state.user.currentUser));
+    const isLoggedIn = Boolean(useSelector(selectors.selectCurrentUser));
 
     const cartedProducts = useSelector(selectors.selectCartedProducts);
 
@@ -86,6 +87,7 @@ const Header = () => {
 
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXs = useMediaQuery(theme.breakpoints.down('xs'))
+    const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -100,6 +102,10 @@ const Header = () => {
 
     const handleDrawer = () => {
         setOpenDrawer(!openDrawer);
+    }
+
+    const signOut = () => {
+        dispatch(actions.userSignOutStart())
     }
 
     const open = Boolean(anchorEl);
@@ -180,7 +186,7 @@ const Header = () => {
                                 (
                                     <Button name={'signout'}
                                             color={'secondary'}
-                                            onClick={() => auth.signOut()}
+                                            onClick={signOut}
                                             className={classes.link}
                                     >
                                         SIGN OUT
@@ -281,7 +287,7 @@ const Header = () => {
                                 {
                                     isLoggedIn ?
                                         (<ListItem name={'signout'} component={Link} href={''}
-                                                   onClick={() => auth.signOut()} button>
+                                                   onClick={signOut} button>
                                             <ListItemText onClick={handleDrawer} primary={'SIGN OUT'}/>
                                         </ListItem>)
                                         :

@@ -41,6 +41,7 @@ export default function MyApp(props) {
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline/>
             <ThemeProvider theme={theme}>
+
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
                         <Layout>
@@ -48,6 +49,7 @@ export default function MyApp(props) {
                         </Layout>
                     </PersistGate>
                 </Provider>
+
             </ThemeProvider>
         </React.Fragment>
     );

@@ -16,4 +16,6 @@ export {
     selectErrorMessage
 } from './shopSelectors'
 
-export {selectCartedProducts} from './cartSelector'
+export {selectCartedProducts} from './cartSelectors'
+
+export {selectCurrentUser} from './userSelectors';

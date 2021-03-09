@@ -28,3 +28,9 @@ export const removeOneItemFromCart = (id) => {
         id: id,
     }
 }
+
+export const clearCart = () => {
+    return {
+        type: actionTypes.CLEAR_CART,
+    }
+}

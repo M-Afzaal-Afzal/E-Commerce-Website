@@ -1,8 +1,15 @@
 import {createSelector} from "reselect";
 
+const selectShop = state => state.shop;
+
+export const selectIsFetching = createSelector(
+    [selectShop],
+    (shop) => shop?.isFetching,
+)
+
 export const selectCollections = state => state.shop.collections;
 
-export const selectIsFetching = state => state.shop.isFetching;
+// export const selectIsFetching = state => state.shop.isFetching;
 
 export const selectErrorMessage = state => state.shop.errorMessage;
 

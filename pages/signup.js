@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
     Box,
     Button,
@@ -12,10 +12,12 @@ import {
     useTheme
 } from "@material-ui/core";
 import {useForm} from "react-hook-form";
-import {auth, createUserProfileDocument} from '../src/firebaseUtils/firebaseUtils';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/router";
+// import {userSignUpStart} from "../src/store/actions/user.actions";
+import * as actions from '../src/store/actions/index.actions';
+import {selectCurrentUser, selectIsLoading} from "../src/store/selectors/userSelectors";
 
 const useStyles = makeStyles(() => ({
     cardContainer: {
@@ -37,18 +39,20 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = () => {
 
-    const user = useSelector(state => state.user.currentUser);
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const classes = useStyles();
-    const {register, handleSubmit, errors, control, watch, reset} = useForm();
-    const [isLoading, setIsLoading] = useState(false);
+    const {register, handleSubmit, errors, control, watch} = useForm();
+
+    const isLoading = useSelector(selectIsLoading);
+    const user = useSelector(selectCurrentUser);
 
     useEffect(() => {
         if (user) {
             router.push('/');
         }
-    },[user])
+    }, [user])
 
     const nameReg = register({
         required: "Please Enter Your Real Name",
@@ -78,21 +82,24 @@ const SignIn = () => {
     })
 
     const onSubmit = handleSubmit(async data => {
-        console.log(data);
-        const {name, email, password} = data;
+
+         dispatch(actions.userSignUpStart(data));
+
+        // console.log(data);
+        // const {name, email, password} = data;
         // console.log(name, email, password, repeatPassword);
 
-        try {
-            setIsLoading(true);
-            const {user} = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, {displayName: name})
-            setIsLoading(false);
-            reset();
-            router.push('/');
-        } catch (err) {
-            setIsLoading(false)
-            console.log(err.message)
-        }
+        // try {
+        //     setIsLoading(true);
+        //     const {user} = await auth.createUserWithEmailAndPassword(email, password);
+        //     await createUserProfileDocument(user, {displayName: name})
+        //     setIsLoading(false);
+        //     reset();
+        //     router.push('/');
+        // } catch (err) {
+        //     setIsLoading(false)
+        //     console.log(err.message)
+        // }
     })
 
     const theme = useTheme();
@@ -182,6 +189,7 @@ const SignIn = () => {
 
                                         <Box mt={5} mb={2} style={{width: '90%'}}>
                                             <Button name={'sign_up'} type={"submit"} fullWidth size={'large'}
+                                                    disabled={isLoading}
                                                     color={'primary'} variant={'contained'}>Sign
                                                 up</Button>
                                         </Box>

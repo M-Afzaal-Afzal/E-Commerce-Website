@@ -1,10 +1,13 @@
 import {useMemo} from 'react'
 import {applyMiddleware, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import thunkMiddleware from 'redux-thunk'
+// import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers/index.reducers'
-import { persistReducer } from 'redux-persist'
+import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from "./sagas/root-saga";
+
 
 const persistConfig = {
     key: 'root',
@@ -15,13 +18,18 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 let store;
 
+const sagaMiddleware = createSagaMiddleware();
+
+const middleWares = [sagaMiddleware];
+
 function initStore(initialState) {
     return createStore(
         persistedReducer,
         initialState,
-        composeWithDevTools(applyMiddleware(thunkMiddleware))
+        composeWithDevTools(applyMiddleware(...middleWares))
     )
 }
+
 
 export const initializeStore = (preloadedState) => {
     let _store = store ?? initStore(preloadedState)
@@ -42,9 +50,11 @@ export const initializeStore = (preloadedState) => {
     // Create the store once in the client
     if (!store) store = _store
 
+    sagaMiddleware.run(rootSaga);
     return _store
 }
 
 export function useStore(initialState) {
     return useMemo(() => initializeStore(initialState), [initialState])
 }
+
